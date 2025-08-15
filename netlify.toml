@@ -1,0 +1,32 @@
+[build]
+  # Directorio de publicación (donde está el HTML principal)
+  publish = "."
+  
+  # Comando de build (no necesario para HTML estático)
+  command = "echo 'No build required'"
+
+[functions]
+  # Directorio de las funciones
+  directory = "netlify/functions"
+  
+  # Runtime de Node.js
+  node_bundler = "esbuild"
+
+# Configuración de headers para CORS
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Headers = "Content-Type"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+
+# Redirecciones para SPA (opcional)
+[[redirects]]
+  from = "/*"
+  to = "/index_burbujas_anchas.html"
+  status = 200
+  conditions = {Role = ["admin"]}
+
+# Variables de entorno (ejemplo - configurar en el panel de Netlify)
+# [build.environment]
+#   GROQ_API_KEY = "tu_clave_aqui"
