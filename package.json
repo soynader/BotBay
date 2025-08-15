@@ -1,0 +1,22 @@
+{
+  "name": "bayport-ia",
+  "version": "1.0.0",
+  "description": "Asistente virtual inteligente para asesoría financiera de Bayport Colombia",
+  "main": "index.html",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build required'"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.7"
+  },
+  "keywords": [
+    "bayport",
+    "ia",
+    "chat",
+    "netlify",
+    "groq"
+  ],
+  "author": "Bayport Colombia",
+  "license": "MIT"
+}

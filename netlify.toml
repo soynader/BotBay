@@ -23,9 +23,8 @@
 # Redirecciones para SPA (opcional)
 [[redirects]]
   from = "/*"
-  to = "/index_burbujas_anchas.html"
+  to = "/index.html"
   status = 200
-  conditions = {Role = ["admin"]}
 
 # Variables de entorno (ejemplo - configurar en el panel de Netlify)
 # [build.environment]
