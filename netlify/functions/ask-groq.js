@@ -131,7 +131,51 @@ exports.handler = async (event, context) => {
       },
       "politicas_credito": {
         "sujetos_credito": ["Empleados y pensionados de entidades públicas, fuerzas militares y policía", "Clientes con un embargo en el desprendible", "Clientes con reportes negativos en centrales de riesgo o sin experiencia crediticia", "Personas de 18 años hasta 79 años 330 días", "Pensionados: procesos jurídicos de Cooperativas, fondos de empleados y cajas de compensación", "Empleados activos: todos los procesos jurídicos", "Clientes con cédula de extranjería (solo pensionados de entidades colombianas)"],
-        "no_sujetos_credito": ["Menores de edad (pensiones de sustitución con representante legal)", "Hijos mayores de 18 años y hasta 25 años con pensión de sustitución", "Interdictos y/o pensionados por incapacidad mental", "Personas con intento de fraude comprobado", "Personas en actividades ilícitas o lavado de activos", "Personas con suspensión de derechos políticos", "Personas con nombramiento de libre nombramiento y remoción y provisional"]
+        "no_sujetos_credito": ["Menores de edad (pensiones de sustitución con representante legal)", "Hijos mayores de 18 años y hasta 25 años con pensión de sustitución", "Interdictos y/o pensionados por incapacidad mental", "Personas con intento de fraude comprobado", "Personas en actividades ilícitas o lavado de activos", "Personas con suspensión de derechos políticos", "Personas con nombramiento de libre nombramiento y remoción y provisional"],
+        "archivos_requeridos": {
+          "pensionados": ["Cédula de ciudadanía", "2 últimos desprendibles de pago (resolución si solo se tiene un desprendible)", "Pensión por invalidez - dictamen médico", "Soporte de la cuenta bancaria cuando el pensionado solicite abono a cuenta"],
+          "fuerzas_militares_policia": ["Cédula de ciudadanía", "Certificación laboral vigencia de 30 días", "2 últimos desprendibles de pago o haberes", "Extracto de hoja de vida", "Soporte de la cuenta bancaria"],
+          "activos": ["Cédula de ciudadanía", "Certificación laboral vigencia de 30 días", "2 últimos desprendibles de pago", "Soporte de la cuenta bancaria"]
+        }
+      },
+      "seguros": {
+        "seguro_vida_deudor": {
+          "coberturas": ["Fallecimiento por cualquier causa (empleados activos y pensionados)", "Incapacidad total y permanente (empleados activos)", "Enfermedades graves (empleados activos)", "Desempleo involuntario (empleados activos)"],
+          "edad_ingreso": "18 años"
+        },
+        "seguro_accidentes_personales": {
+          "cobertura": "Fallecimiento por accidente",
+          "planes": {
+            "tipos": "Planes individuales y familiares",
+            "cobertura_rango": "$35,000,000 hasta $95,000,000"
+          }
+        }
+      },
+      "calculo_capacidad_pago": {
+        "definicion": "Valor máximo mensual de la nómina que puede disponer un cliente para el pago de un crédito",
+        "metodos_calculo": {
+          "ley_1527": "Capacidad = (Ingresos - Descuentos de ley - Otros descuentos - Colchón + Compra de cartera)",
+          "ley_50": "Capacidad = (Ingresos × 50%) - Total descuentos - Colchón + Compra de cartera",
+          "minimo_vital": "Capacidad = Ingresos - Mínimo Vital - Total descuentos - Colchón + Compra de cartera"
+        }
+      },
+      "argumentos_venta": {
+        "ventajas_competitivas": ["Agilidad en procesos y atención personalizada/asistida", "Crédito 100% digital sin obligatoriedad de presencia física", "Mínimos documentos para formalización", "Herramientas tecnológicas disponibles (Portal de clientes)", "Validación de identidad y firma digital con proveedores expertos", "Transparencia en todos los procesos", "Comunicación constante durante el trámite"],
+        "portal_clientes": {
+          "acceso": ["https://www.bayportcolombia.com", "https://www.bayportcolombia.com/portalclientes/"],
+          "tramites": ["Certificado de saldo", "Tabla de amortización", "Condiciones del crédito", "Aclaración de pago", "Devolución de dinero", "Paz y salvo", "Certificación al día", "Certificación declaración de renta", "Condiciones del seguro", "Consulta documentos de crédito", "Detalle de estado de cuenta", "Pago cuota"]
+        },
+        "canales_servicio": {
+          "telefonos": {
+            "bogota": "(601) 7442484",
+            "gratuita_nacional": "018000113881",
+            "horario": "Lunes a viernes de 8:00 am a 5:00 pm"
+          }
+        }
+      },
+      "codigo_etica": {
+        "deberes_asesor": ["Siempre entregar información completa y clara según lineamientos de la compañía", "Aclarar condiciones del crédito (monto, plazo, cuota, descuentos) antes de la aceptación y desembolso", "Tomar medidas para evitar fraudes, revisando documentos del cliente", "Diligenciamiento completo de formularios", "Siempre presentar beneficios de la póliza de seguro de vida voluntario", "Tratar clientes y colegas con honestidad, integridad y profesionalismo", "Cuidar presentación personal y ser puntual en citas", "Asistir puntualmente a entrenamientos y reuniones programadas", "Contar con formato de solicitud firmado por el cliente para perfilamiento", "Hacer firmar documentos nuevamente si hay cambios en condiciones"],
+        "prohibiciones_asesor": ["Solicitar dinero al cliente por cualquier concepto", "Ofrecer condiciones diferentes a las establecidas por la compañía", "Realizar promesas que no se puedan cumplir", "Falsificar o alterar documentos", "Compartir información confidencial de clientes", "Usar información de clientes para beneficio personal", "Realizar actividades que generen conflicto de interés", "Discriminar por raza, género, religión o condición social", "Usar lenguaje inapropiado o tener comportamientos inadecuados", "Realizar actividades comerciales durante horarios de trabajo"]
       }
      };
     
@@ -202,14 +246,14 @@ ${knowledgeData.politicas_credito.sujetos_credito.map(s => `- ${s}`).join('\n')}
 ${knowledgeData.politicas_credito.no_sujetos_credito.map(s => `- ${s}`).join('\n')}
 
 ### Documentos Requeridos
-**Pensionados:** ${knowledgeData.documentos_requeridos.pensionados.join(', ')}
-**Activos:** ${knowledgeData.documentos_requeridos.activos.join(', ')}
-**Fuerzas Militares/Policía:** ${knowledgeData.documentos_requeridos.fuerzas_militares_policia.join(', ')}
+**Pensionados:** ${knowledgeData.politicas_credito.archivos_requeridos.pensionados.join(', ')}
+**Activos:** ${knowledgeData.politicas_credito.archivos_requeridos.activos.join(', ')}
+**Fuerzas Militares/Policía:** ${knowledgeData.politicas_credito.archivos_requeridos.fuerzas_militares_policia.join(', ')}
 
 ## SEGUROS
 ### Seguro de Vida Deudor
 - Coberturas: ${knowledgeData.seguros.seguro_vida_deudor.coberturas.join(', ')}
-- Edad máxima de ingreso: ${knowledgeData.seguros.seguro_vida_deudor.edad_maxima_ingreso}
+- Edad mínima de ingreso: ${knowledgeData.seguros.seguro_vida_deudor.edad_ingreso}
 
 ### Seguro de Accidentes Personales
 - Cobertura: ${knowledgeData.seguros.seguro_accidentes_personales.cobertura}
