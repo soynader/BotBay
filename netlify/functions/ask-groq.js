@@ -1,4 +1,6 @@
 const fetch = require('node-fetch');
+const fs = require('fs');
+const path = require('path');
 
 exports.handler = async (event, context) => {
   // Solo permitir POST requests
@@ -42,83 +44,105 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Conocimiento base de Bayport
+    // Cargar conocimiento desde archivo JSON
+    const knowledgePath = path.join(process.cwd(), 'knowledge', 'asesores.json');
+    const knowledgeData = JSON.parse(fs.readFileSync(knowledgePath, 'utf8'));
+    
+    // Convertir el JSON a texto estructurado para la IA
     const KNOWLEDGE = `
-# 🚀 Kit de Asesoría Freelance – Bayport Colombia
+# Asistente de IA para Asesores Bayport Colombia
 
-## 📌 Perfil del Cliente Ideal
-- **Edad**: 25-55 años
-- **Ingresos**: $2.500.000 - $8.000.000 COP
-- **Perfil**: Empleados formales, pensionados, independientes con 2 años de experiencia
-- **Nivel de endeudamiento**: < 40% de sus ingresos
-- **Propósito**: Consolidar deudas, mejorar cash-flow, inversión personal
+## INFORMACIÓN CORPORATIVA
+${knowledgeData.empresa.nombre} - ${knowledgeData.empresa.descripcion}
+- Experiencia: ${knowledgeData.empresa.experiencia}
+- Grupo: ${knowledgeData.empresa.grupo}
+- Experiencia internacional: ${knowledgeData.empresa.experiencia_internacional}
+- Presencia internacional: ${knowledgeData.empresa.presencia_internacional.join(', ')}
 
-## 🎯 Productos Clave
+### Cifras Relevantes
+- Clientes mundial: ${knowledgeData.empresa.cifras.clientes_mundial}
+- Sucursales: ${knowledgeData.empresa.cifras.sucursales}
+- Colaboradores: ${knowledgeData.empresa.cifras.colaboradores}
+- Sucursales Colombia: ${knowledgeData.empresa.cifras.sucursales_colombia}
+- Clientes Colombia: ${knowledgeData.empresa.cifras.clientes_colombia}
+- Cartera: ${knowledgeData.empresa.cifras.cartera}
+- Participación mercado: ${knowledgeData.empresa.cifras.participacion_mercado}
 
-### 📊 Línea Libre Inversión
-- **Monto**: 1-50 millones COP
-- **Plazo**: 12-84 meses
-- **Tasa**: Desde 1.4% mensual
-- **Desembolso**: 24-48 horas
-- **Documentación**: Mínima (solo cédula y desprendibles)
+### Regulación
+- Regulado por: ${knowledgeData.empresa.regulacion.regulado_por}
+- Vigilado por: ${knowledgeData.empresa.regulacion.vigilado_por}
+- Aclaraciones: ${knowledgeData.empresa.regulacion.aclaraciones.join(', ')}
 
-### 🔁 Reestructuración de Deudas
-- **Beneficio**: Reduce pagos mensuales hasta 50%
-- **Incluye**: Tarjetas de crédito, créditos de libranza, vehículo, vivienda
-- **Ventaja**: Un solo pago mensual
+## TIPOS DE CRÉDITO
+${knowledgeData.tipos_credito.map(tipo => `- **${tipo.tipo}**: ${tipo.descripcion}`).join('\n')}
 
-### 💼 Crédito por Libranza
-- **Deducción**: Directo de nómina/pensión
-- **Seguro**: Cubre riesgos de vida y desempleo
-- **Tasa**: Reducida por deducción automática
+## BENEFICIOS PARA ASESORES
+### Ventajas
+${knowledgeData.beneficios_asesores.ventajas.map(v => `- ${v}`).join('\n')}
 
-## 🛡️ Beneficios Exclusivos
-- **Seguro de vida**: Incluido sin costo
-- **Aprobación**: 95% de clientes califican
-- **Flexibilidad**: Pago anticipado sin penalidades
-- **Atención**: Personalizada 24/7
+### Comisiones
+- Desembolso: ${knowledgeData.beneficios_asesores.comisiones.desembolso.valor}
+- Ejemplo: ${knowledgeData.beneficios_asesores.comisiones.desembolso.ejemplo}
+- Refinanciación: ${knowledgeData.beneficios_asesores.comisiones.refinanciacion.valor}
 
-## 📋 Requisitos Mínimos
-1. **Cédula ciudadanía**
-2. **Desprendible de nómina** (últimos 2 meses)
-3. **Certificado laboral** (mínimo 6 meses)
-4. **Extractos bancarios** (opcional para mejor tasa)
+## ESTRUCTURA DEL PRODUCTO
+- Plazo: ${knowledgeData.estructura_producto.plazo}
+- Fianza: ${knowledgeData.estructura_producto.fianza}
+- Tasas: ${knowledgeData.estructura_producto.tasas}
+- Comisión corretaje: ${knowledgeData.estructura_producto.comision_corretaje}
 
-## 💳 Comparativa Competitiva
-| Característica     | Bayport | Bancos | Cooperativas |
-|--------------------|---------|--------|--------------|  
-| Aprobación         | 95%     | 40%    | 70%          |
-| Desembolso         | 24h     | 7-15 días | 3-5 días |
-| Tasa promedio      | 1.4%    | 2.5%   | 1.8%         |
-| Documentación      | Mínima  | Extensa| Media        |
+## POLÍTICAS DE CRÉDITO
+### Sujetos de crédito
+${knowledgeData.politicas_credito.sujetos_credito.map(s => `- ${s}`).join('\n')}
 
-## 🎯 Objecciones Comunes y Respuestas
+### NO sujetos de crédito
+${knowledgeData.politicas_credito.no_sujetos_credito.map(s => `- ${s}`).join('\n')}
 
-### "La tasa es muy alta"
-→ Comparada con tarjetas de crédito (3.5% mensual), nuestra tasa es 60% más baja. Además, incluye seguro de vida.
+### Archivos Requeridos
+**Pensionados:** ${knowledgeData.politicas_credito.archivos_requeridos.pensionados.join(', ')}
+**Fuerzas Militares/Policía:** ${knowledgeData.politicas_credito.archivos_requeridos.fuerzas_militares_policia.join(', ')}
+**Activos:** ${knowledgeData.politicas_credito.archivos_requeridos.activos.join(', ')}
 
-### "Prefiero esperar"
-→ Cada día que espera, paga más intereses. Con nuestro promedio de ahorro de $300.000 mensual, esperar 3 meses le cuesta $900.000.
+## SEGUROS
+### Seguro Vida Deudor
+- Coberturas: ${knowledgeData.seguros.seguro_vida_deudor.coberturas.join(', ')}
+- Edad ingreso: ${knowledgeData.seguros.seguro_vida_deudor.edad_ingreso}
 
-### "No estoy seguro"
-→ Ofrecemos evaluación gratuita sin compromiso. Solo necesita su cédula para una pre-aprobación en 5 minutos.
+### Seguro Accidentes Personales
+- Cobertura: ${knowledgeData.seguros.seguro_accidentes_personales.cobertura}
+- Planes: ${knowledgeData.seguros.seguro_accidentes_personales.planes.tipos}
+- Cobertura rango: ${knowledgeData.seguros.seguro_accidentes_personales.planes.cobertura_rango}
 
-### "Tengo miedo de endeudarme más"
-→ Esta es precisamente la solución para reducir su endeudamiento total. Consolidamos todas sus deudas en una sola cuota menor.
+## CÁLCULO CAPACIDAD DE PAGO
+${knowledgeData.calculo_capacidad_pago.definicion}
 
-## 📞 Cierre Efectivo
-"Señor/a [Nombre], con su permiso, ¿podemos hacer la solicitud ahora? Solo necesito 5 minutos y su cédula. En 24 horas tendrá el dinero en su cuenta y empezará a ahorrar desde el primer mes."
+### Métodos de Cálculo
+- **Ley 1527**: ${knowledgeData.calculo_capacidad_pago.metodos_calculo.ley_1527}
+- **Ley 50**: ${knowledgeData.calculo_capacidad_pago.metodos_calculo.ley_50}
+- **Mínimo Vital**: ${knowledgeData.calculo_capacidad_pago.metodos_calculo.minimo_vital}
 
-## ⚡ Llamado a la Acción
-"¿Tiene 5 minutos ahora? Puedo hacer la pre-aprobación inmediatamente y en 24 horas tendrá su dinero."
+## ARGUMENTOS DE VENTA
+### Ventajas Competitivas
+${knowledgeData.argumentos_venta.ventajas_competitivas.map(v => `- ${v}`).join('\n')}
 
-## 📱 Contacto
-- **WhatsApp**: 300-123-4567
-- **Horario**: Lunes a viernes 8 AM - 8 PM
-- **Sábados**: 9 AM - 2 PM
+### Portal de Clientes
+- Acceso: ${knowledgeData.argumentos_venta.portal_clientes.acceso.join(', ')}
+- Trámites disponibles: ${knowledgeData.argumentos_venta.portal_clientes.tramites.join(', ')}
 
----
-**Recuerda**: Cada cliente tiene necesidades únicas. Adapta esta información según su perfil específico.
+### Canales de Servicio
+- Teléfono Bogotá: ${knowledgeData.argumentos_venta.canales_servicio.telefonos.bogota}
+- Línea gratuita: ${knowledgeData.argumentos_venta.canales_servicio.telefonos.gratuita_nacional}
+- Horario: ${knowledgeData.argumentos_venta.canales_servicio.telefonos.horario}
+
+## CÓDIGO DE ÉTICA
+### Deberes del Asesor
+${knowledgeData.codigo_etica.deberes_asesor.slice(0, 10).map(d => `- ${d}`).join('\n')}
+
+### Prohibiciones
+${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`).join('\n')}
+
+## GLOSARIO DE TÉRMINOS
+${Object.entries(knowledgeData.glosario).map(([termino, definicion]) => `- **${termino}**: ${definicion}`).join('\n')}
     `;
 
     // Crear el prompt para la IA
