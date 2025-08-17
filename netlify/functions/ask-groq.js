@@ -44,86 +44,95 @@ exports.handler = async (event, context) => {
 
     // Conocimiento base para asesores (extraído de asesores.json)
     const knowledgeData = {
-      "informacion_corporativa": {
-        "nombre_empresa": "Bayport Colombia",
-        "tipo_empresa": "Fintech de crédito digital",
-        "historia": "Fundada en 2001 en Sudáfrica, llegó a Colombia en 2018",
-        "presencia_internacional": "9 países (Sudáfrica, Botswana, Ghana, México, Colombia, etc.)",
-        "inversionistas_clave": "LeapFrog Investments, Arise B.V.",
-        "regulacion": "Supervisada por la Superintendencia Financiera de Colombia"
-      },
-      "glosario": {
-        "conceptos_basicos": {
-          "libranza": "Modalidad de crédito donde el descuento se realiza directamente de la nómina o pensión del deudor",
-          "capacidad_de_pago": "Análisis de los ingresos y gastos del cliente para determinar su capacidad de endeudamiento",
-          "score_crediticio": "Puntaje que evalúa el historial crediticio y comportamiento de pago",
-          "tasa_efectiva_anual": "Costo total del crédito expresado en términos anuales",
-          "seguro_deudor": "Protección que cubre el saldo de la deuda en caso de fallecimiento o incapacidad"
+      "empresa": {
+        "nombre": "Bayport Colombia",
+        "descripcion": "Empresa financiera especializada en créditos de libranza para empleados públicos, fuerzas militares, policía y pensionados",
+        "experiencia": "Más de 10 años en el mercado colombiano",
+        "grupo": "Bayport Management Ltd",
+        "experiencia_internacional": "Más de 19 años en préstamos por libranza",
+        "presencia_internacional": ["Sudáfrica", "Zambia", "Uganda", "México", "Mozambique", "Tanzania", "Colombia", "Ghana", "Botswana"],
+        "cifras": {
+          "clientes_mundial": "Más de 600,000",
+          "sucursales": "Más de 500",
+          "colaboradores": "7,500",
+          "sucursales_colombia": "17 en 15 ciudades",
+          "clientes_colombia": "Más de 67,000",
+          "cartera": "Cercano a COP 1.2 billones",
+          "participacion_mercado": "32% del mercado no bancario"
         },
-        "tipos_credito": {
-          "libre_inversion": "Crédito sin destinación específica, el cliente decide en qué utilizarlo",
-          "consolidacion_deudas": "Unificación de múltiples obligaciones en un solo crédito con mejores condiciones",
-          "credito_libranza": "Crédito con descuento directo de nómina, ofreciendo tasas preferenciales"
+        "regulacion": {
+          "regulado_por": "Superintendencia de Sociedades",
+          "vigilado_por": "Superintendencia de Industria y Comercio",
+          "aclaraciones": ["No somos un banco (no captamos dinero del público)", "No somos una cooperativa (no solicitamos aportes ni vinculación como asociado)"]
         }
       },
+      "glosario": {
+        "libranza": "Autorización que el cliente da a su entidad pagadora para que realice el descuento de su nómina o pensión y consigne directamente a Bayport la cuota acordada",
+        "pagaduria": "Entidad con la que Bayport tiene un convenio para descuentos por libranza de empleados o pensionados",
+        "desprendible_pago": "Soporte de pago que las entidades expiden a sus empleados o pensionados donde se reflejan sus ingresos y descuentos mensuales",
+        "embargo_pensional": "Orden judicial emitida para el cumplimiento de una obligación no pagada, que opera sobre el salario o pensión",
+        "paz_salvo": "Documento que certifica la cancelación total de una obligación financiera",
+        "fianza": "Garantía del crédito sugerida y otorgada por un tercero. Tarifa única descontada al momento del desembolso",
+        "score_crediticio": "Medición del hábito de pago del cliente, calculada sobre el número de cifras (bajo = menos favorable, alto = mejor)"
+      },
+      "tipos_credito": [
+        {
+          "tipo": "Crédito nuevo",
+          "descripcion": "Para clientes sin vínculo actual con la compañía"
+        },
+        {
+          "tipo": "Compra de cartera",
+          "descripcion": "Crédito desembolsado directamente a entidades donde el cliente tiene deudas"
+        },
+        {
+          "tipo": "Refinanciación",
+          "descripcion": "Para clientes con crédito vigente en Bayport, unificando la deuda en una sola operación"
+        },
+        {
+          "tipo": "Crédito paralelo",
+          "descripcion": "Adicional para clientes con crédito vigente, con autorización de la pagaduría para múltiples descuentos"
+        }
+      ],
       "beneficios_asesores": {
         "ventajas": [
-          "Comisiones competitivas por cada crédito aprobado",
-          "Proceso 100% digital y ágil",
-          "Soporte técnico y comercial permanente",
-          "Herramientas de gestión y seguimiento",
-          "Capacitación continua en productos financieros"
+          "Manejo de tiempo flexible",
+          "Plan de comisiones sin techo",
+          "Procesos ágiles y sencillos",
+          "Herramientas tecnológicas",
+          "Atención desde casa",
+          "Concursos y reconocimientos",
+          "Plan de Lealtad (Bayport Plus)",
+          "Acompañamiento humano",
+          "Capacitación continua",
+          "Independencia laboral"
         ],
         "comisiones": {
-          "estructura": "Comisión variable según monto y tipo de producto",
-          "pago": "Mensual, posterior al desembolso del crédito",
-          "bonos_adicionales": "Incentivos por cumplimiento de metas mensuales"
+          "desembolso": {
+            "valor": "$50,000 por millón desembolsado",
+            "ejemplo": "Desembolso de $130,000,000 = $6,500,000 (menos descuentos de ley)",
+            "frecuencia_pago": "Pagos semanales"
+          },
+          "refinanciacion": {
+            "valor": "$10,000 por millón refinanciado",
+            "adicional": "$50,000 por millón de dinero adicional"
+          }
         },
         "bono_millonario": {
-           "descripcion": "Beneficio trimestral por desembolsos realizados",
-           "fechas_pago_2024": ["12 de abril", "12 de julio", "11 de octubre", "23 de diciembre"],
-           "requisitos": ["Código activo al momento del pago", "Al día con órdenes de facturación", "Solo aplica para cash adicional (no refinanciación)"]
-         },
-         "comisiones": {
-           "desembolso": {
-             "valor": "$50,000 por millón desembolsado",
-             "ejemplo": "Desembolso de $130,000,000 = $6,500,000 (menos descuentos de ley)",
-             "frecuencia_pago": "Pagos semanales"
-           },
-           "refinanciacion": {
-             "valor": "$10,000 por millón refinanciado",
-             "adicional": "$50,000 por millón de dinero adicional"
-           }
-         }
-       },
-       "tipos_credito": [
-         {
-           "tipo": "Crédito nuevo",
-           "descripcion": "Para clientes sin vínculo actual con la compañía"
-         },
-         {
-           "tipo": "Compra de cartera",
-           "descripcion": "Crédito desembolsado directamente a entidades donde el cliente tiene deudas"
-         },
-         {
-           "tipo": "Refinanciación",
-           "descripcion": "Para clientes con crédito vigente en Bayport, unificando la deuda en una sola operación"
-         },
-         {
-           "tipo": "Crédito paralelo",
-           "descripcion": "Adicional para clientes con crédito vigente, con autorización de la pagaduría para múltiples descuentos"
-         }
-       ],
-       "estructura_producto": {
-         "plazo": "Hasta 144 meses",
-         "fianza": "7% (IVA incluido) - Garantía que respalda la obligación, tarifa única descontada al momento del desembolso",
-         "tasas": "De acuerdo al score crediticio del cliente",
-         "comision_corretaje": "5% - Valor porcentual que paga el cliente por el estudio y administración del crédito"
-       },
-       "politicas_credito": {
-         "sujetos_credito": ["Empleados y pensionados de entidades públicas, fuerzas militares y policía", "Clientes con un embargo en el desprendible", "Clientes con reportes negativos en centrales de riesgo o sin experiencia crediticia", "Personas de 18 años hasta 79 años 330 días"],
-         "no_sujetos_credito": ["Menores de edad", "Interdictos y/o pensionados por incapacidad mental", "Personas con intento de fraude comprobado", "Personas en actividades ilícitas"]
-       }
+          "descripcion": "Beneficio trimestral por desembolsos realizados",
+          "fechas_pago_2024": ["12 de abril", "12 de julio", "11 de octubre", "23 de diciembre"],
+          "requisitos": ["Código activo al momento del pago", "Al día con órdenes de facturación", "Solo aplica para cash adicional (no refinanciación)"]
+        }
+      },
+      "estructura_producto": {
+        "plazo": "Hasta 144 meses",
+        "fianza": "7% (IVA incluido) - Garantía que respalda la obligación, tarifa única descontada al momento del desembolso",
+        "tasas": "De acuerdo al score crediticio del cliente",
+        "comision_corretaje": "5% - Valor porcentual que paga el cliente por el estudio y administración del crédito"
+      },
+      "politicas_credito": {
+        "sujetos_credito": ["Empleados y pensionados de entidades públicas, fuerzas militares y policía", "Clientes con un embargo en el desprendible", "Clientes con reportes negativos en centrales de riesgo o sin experiencia crediticia", "Personas de 18 años hasta 79 años 330 días", "Pensionados: procesos jurídicos de Cooperativas, fondos de empleados y cajas de compensación", "Empleados activos: todos los procesos jurídicos", "Clientes con cédula de extranjería (solo pensionados de entidades colombianas)"],
+        "no_sujetos_credito": ["Menores de edad (pensiones de sustitución con representante legal)", "Hijos mayores de 18 años y hasta 25 años con pensión de sustitución", "Interdictos y/o pensionados por incapacidad mental", "Personas con intento de fraude comprobado", "Personas en actividades ilícitas o lavado de activos", "Personas con suspensión de derechos políticos", "Personas con nombramiento de libre nombramiento y remoción y provisional"]
+      }
      };
     
     // Convertir el JSON a texto estructurado para la IA
@@ -131,25 +140,34 @@ exports.handler = async (event, context) => {
 # Asistente de IA para Asesores Bayport Colombia
 
 ## INFORMACIÓN CORPORATIVA
-- Empresa: ${knowledgeData.informacion_corporativa.nombre_empresa}
-- Tipo: ${knowledgeData.informacion_corporativa.tipo_empresa}
-- Historia: ${knowledgeData.informacion_corporativa.historia}
-- Presencia internacional: ${knowledgeData.informacion_corporativa.presencia_internacional}
-- Inversionistas clave: ${knowledgeData.informacion_corporativa.inversionistas_clave}
-- Regulación: ${knowledgeData.informacion_corporativa.regulacion}
+- Empresa: ${knowledgeData.empresa.nombre}
+- Descripción: ${knowledgeData.empresa.descripcion}
+- Experiencia: ${knowledgeData.empresa.experiencia}
+- Grupo: ${knowledgeData.empresa.grupo}
+- Experiencia internacional: ${knowledgeData.empresa.experiencia_internacional}
+- Presencia internacional: ${knowledgeData.empresa.presencia_internacional.join(', ')}
+
+### Cifras Relevantes
+- Clientes mundial: ${knowledgeData.empresa.cifras.clientes_mundial}
+- Sucursales: ${knowledgeData.empresa.cifras.sucursales}
+- Colaboradores: ${knowledgeData.empresa.cifras.colaboradores}
+- Sucursales Colombia: ${knowledgeData.empresa.cifras.sucursales_colombia}
+- Clientes Colombia: ${knowledgeData.empresa.cifras.clientes_colombia}
+- Cartera: ${knowledgeData.empresa.cifras.cartera}
+- Participación mercado: ${knowledgeData.empresa.cifras.participacion_mercado}
+
+### Regulación
+- Regulado por: ${knowledgeData.empresa.regulacion.regulado_por}
+- Vigilado por: ${knowledgeData.empresa.regulacion.vigilado_por}
+- Aclaraciones: ${knowledgeData.empresa.regulacion.aclaraciones.join(', ')}
 
 ## GLOSARIO DE TÉRMINOS
-### Conceptos Básicos
-- **Libranza**: ${knowledgeData.glosario.conceptos_basicos.libranza}
-- **Capacidad de pago**: ${knowledgeData.glosario.conceptos_basicos.capacidad_de_pago}
-- **Score crediticio**: ${knowledgeData.glosario.conceptos_basicos.score_crediticio}
-- **Tasa efectiva anual**: ${knowledgeData.glosario.conceptos_basicos.tasa_efectiva_anual}
-- **Seguro deudor**: ${knowledgeData.glosario.conceptos_basicos.seguro_deudor}
-
-### Tipos de Crédito
-- **Libre inversión**: ${knowledgeData.glosario.tipos_credito.libre_inversion}
-- **Consolidación de deudas**: ${knowledgeData.glosario.tipos_credito.consolidacion_deudas}
-- **Crédito libranza**: ${knowledgeData.glosario.tipos_credito.credito_libranza}
+- **Libranza**: ${knowledgeData.glosario.libranza}
+- **Pagaduría**: ${knowledgeData.glosario.pagaduria}
+- **Desprendible de pago**: ${knowledgeData.glosario.desprendible_pago}
+- **Embargo pensional**: ${knowledgeData.glosario.embargo_pensional}
+- **Paz y salvo**: ${knowledgeData.glosario.paz_salvo}
+- **Fianza**: ${knowledgeData.glosario.fianza}
 
 ## TIPOS DE CRÉDITO DISPONIBLES
 ${knowledgeData.tipos_credito.map(tipo => `- **${tipo.tipo}**: ${tipo.descripcion}`).join('\n')}
