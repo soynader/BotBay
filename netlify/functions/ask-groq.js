@@ -1,6 +1,4 @@
 const fetch = require('node-fetch');
-const fs = require('fs');
-const path = require('path');
 
 exports.handler = async (event, context) => {
   // Solo permitir POST requests
@@ -44,9 +42,89 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Cargar conocimiento desde archivo JSON
-    const knowledgePath = path.join(process.cwd(), 'knowledge', 'asesores.json');
-    const knowledgeData = JSON.parse(fs.readFileSync(knowledgePath, 'utf8'));
+    // Conocimiento base para asesores (extraído de asesores.json)
+    const knowledgeData = {
+      "informacion_corporativa": {
+        "nombre_empresa": "Bayport Colombia",
+        "tipo_empresa": "Fintech de crédito digital",
+        "historia": "Fundada en 2001 en Sudáfrica, llegó a Colombia en 2018",
+        "presencia_internacional": "9 países (Sudáfrica, Botswana, Ghana, México, Colombia, etc.)",
+        "inversionistas_clave": "LeapFrog Investments, Arise B.V.",
+        "regulacion": "Supervisada por la Superintendencia Financiera de Colombia"
+      },
+      "glosario": {
+        "conceptos_basicos": {
+          "libranza": "Modalidad de crédito donde el descuento se realiza directamente de la nómina o pensión del deudor",
+          "capacidad_de_pago": "Análisis de los ingresos y gastos del cliente para determinar su capacidad de endeudamiento",
+          "score_crediticio": "Puntaje que evalúa el historial crediticio y comportamiento de pago",
+          "tasa_efectiva_anual": "Costo total del crédito expresado en términos anuales",
+          "seguro_deudor": "Protección que cubre el saldo de la deuda en caso de fallecimiento o incapacidad"
+        },
+        "tipos_credito": {
+          "libre_inversion": "Crédito sin destinación específica, el cliente decide en qué utilizarlo",
+          "consolidacion_deudas": "Unificación de múltiples obligaciones en un solo crédito con mejores condiciones",
+          "credito_libranza": "Crédito con descuento directo de nómina, ofreciendo tasas preferenciales"
+        }
+      },
+      "beneficios_asesores": {
+        "ventajas": [
+          "Comisiones competitivas por cada crédito aprobado",
+          "Proceso 100% digital y ágil",
+          "Soporte técnico y comercial permanente",
+          "Herramientas de gestión y seguimiento",
+          "Capacitación continua en productos financieros"
+        ],
+        "comisiones": {
+          "estructura": "Comisión variable según monto y tipo de producto",
+          "pago": "Mensual, posterior al desembolso del crédito",
+          "bonos_adicionales": "Incentivos por cumplimiento de metas mensuales"
+        },
+        "bono_millonario": {
+           "descripcion": "Beneficio trimestral por desembolsos realizados",
+           "fechas_pago_2024": ["12 de abril", "12 de julio", "11 de octubre", "23 de diciembre"],
+           "requisitos": ["Código activo al momento del pago", "Al día con órdenes de facturación", "Solo aplica para cash adicional (no refinanciación)"]
+         },
+         "comisiones": {
+           "desembolso": {
+             "valor": "$50,000 por millón desembolsado",
+             "ejemplo": "Desembolso de $130,000,000 = $6,500,000 (menos descuentos de ley)",
+             "frecuencia_pago": "Pagos semanales"
+           },
+           "refinanciacion": {
+             "valor": "$10,000 por millón refinanciado",
+             "adicional": "$50,000 por millón de dinero adicional"
+           }
+         }
+       },
+       "tipos_credito": [
+         {
+           "tipo": "Crédito nuevo",
+           "descripcion": "Para clientes sin vínculo actual con la compañía"
+         },
+         {
+           "tipo": "Compra de cartera",
+           "descripcion": "Crédito desembolsado directamente a entidades donde el cliente tiene deudas"
+         },
+         {
+           "tipo": "Refinanciación",
+           "descripcion": "Para clientes con crédito vigente en Bayport, unificando la deuda en una sola operación"
+         },
+         {
+           "tipo": "Crédito paralelo",
+           "descripcion": "Adicional para clientes con crédito vigente, con autorización de la pagaduría para múltiples descuentos"
+         }
+       ],
+       "estructura_producto": {
+         "plazo": "Hasta 144 meses",
+         "fianza": "7% (IVA incluido) - Garantía que respalda la obligación, tarifa única descontada al momento del desembolso",
+         "tasas": "De acuerdo al score crediticio del cliente",
+         "comision_corretaje": "5% - Valor porcentual que paga el cliente por el estudio y administración del crédito"
+       },
+       "politicas_credito": {
+         "sujetos_credito": ["Empleados y pensionados de entidades públicas, fuerzas militares y policía", "Clientes con un embargo en el desprendible", "Clientes con reportes negativos en centrales de riesgo o sin experiencia crediticia", "Personas de 18 años hasta 79 años 330 días"],
+         "no_sujetos_credito": ["Menores de edad", "Interdictos y/o pensionados por incapacidad mental", "Personas con intento de fraude comprobado", "Personas en actividades ilícitas"]
+       }
+     };
     
     // Convertir el JSON a texto estructurado para la IA
     const KNOWLEDGE = `
