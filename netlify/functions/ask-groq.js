@@ -131,27 +131,27 @@ exports.handler = async (event, context) => {
 # Asistente de IA para Asesores Bayport Colombia
 
 ## INFORMACIÓN CORPORATIVA
-${knowledgeData.empresa.nombre} - ${knowledgeData.empresa.descripcion}
-- Experiencia: ${knowledgeData.empresa.experiencia}
-- Grupo: ${knowledgeData.empresa.grupo}
-- Experiencia internacional: ${knowledgeData.empresa.experiencia_internacional}
-- Presencia internacional: ${knowledgeData.empresa.presencia_internacional.join(', ')}
+- Empresa: ${knowledgeData.informacion_corporativa.nombre_empresa}
+- Tipo: ${knowledgeData.informacion_corporativa.tipo_empresa}
+- Historia: ${knowledgeData.informacion_corporativa.historia}
+- Presencia internacional: ${knowledgeData.informacion_corporativa.presencia_internacional}
+- Inversionistas clave: ${knowledgeData.informacion_corporativa.inversionistas_clave}
+- Regulación: ${knowledgeData.informacion_corporativa.regulacion}
 
-### Cifras Relevantes
-- Clientes mundial: ${knowledgeData.empresa.cifras.clientes_mundial}
-- Sucursales: ${knowledgeData.empresa.cifras.sucursales}
-- Colaboradores: ${knowledgeData.empresa.cifras.colaboradores}
-- Sucursales Colombia: ${knowledgeData.empresa.cifras.sucursales_colombia}
-- Clientes Colombia: ${knowledgeData.empresa.cifras.clientes_colombia}
-- Cartera: ${knowledgeData.empresa.cifras.cartera}
-- Participación mercado: ${knowledgeData.empresa.cifras.participacion_mercado}
+## GLOSARIO DE TÉRMINOS
+### Conceptos Básicos
+- **Libranza**: ${knowledgeData.glosario.conceptos_basicos.libranza}
+- **Capacidad de pago**: ${knowledgeData.glosario.conceptos_basicos.capacidad_de_pago}
+- **Score crediticio**: ${knowledgeData.glosario.conceptos_basicos.score_crediticio}
+- **Tasa efectiva anual**: ${knowledgeData.glosario.conceptos_basicos.tasa_efectiva_anual}
+- **Seguro deudor**: ${knowledgeData.glosario.conceptos_basicos.seguro_deudor}
 
-### Regulación
-- Regulado por: ${knowledgeData.empresa.regulacion.regulado_por}
-- Vigilado por: ${knowledgeData.empresa.regulacion.vigilado_por}
-- Aclaraciones: ${knowledgeData.empresa.regulacion.aclaraciones.join(', ')}
+### Tipos de Crédito
+- **Libre inversión**: ${knowledgeData.glosario.tipos_credito.libre_inversion}
+- **Consolidación de deudas**: ${knowledgeData.glosario.tipos_credito.consolidacion_deudas}
+- **Crédito libranza**: ${knowledgeData.glosario.tipos_credito.credito_libranza}
 
-## TIPOS DE CRÉDITO
+## TIPOS DE CRÉDITO DISPONIBLES
 ${knowledgeData.tipos_credito.map(tipo => `- **${tipo.tipo}**: ${tipo.descripcion}`).join('\n')}
 
 ## BENEFICIOS PARA ASESORES
@@ -159,15 +159,22 @@ ${knowledgeData.tipos_credito.map(tipo => `- **${tipo.tipo}**: ${tipo.descripcio
 ${knowledgeData.beneficios_asesores.ventajas.map(v => `- ${v}`).join('\n')}
 
 ### Comisiones
-- Desembolso: ${knowledgeData.beneficios_asesores.comisiones.desembolso.valor}
-- Ejemplo: ${knowledgeData.beneficios_asesores.comisiones.desembolso.ejemplo}
-- Refinanciación: ${knowledgeData.beneficios_asesores.comisiones.refinanciacion.valor}
+- **Desembolso**: ${knowledgeData.beneficios_asesores.comisiones.desembolso.valor}
+- **Ejemplo**: ${knowledgeData.beneficios_asesores.comisiones.desembolso.ejemplo}
+- **Frecuencia de pago**: ${knowledgeData.beneficios_asesores.comisiones.desembolso.frecuencia_pago}
+- **Refinanciación**: ${knowledgeData.beneficios_asesores.comisiones.refinanciacion.valor}
+- **Adicional refinanciación**: ${knowledgeData.beneficios_asesores.comisiones.refinanciacion.adicional}
+
+### Bono Millonario
+- **Descripción**: ${knowledgeData.beneficios_asesores.bono_millonario.descripcion}
+- **Fechas de pago 2024**: ${knowledgeData.beneficios_asesores.bono_millonario.fechas_pago_2024.join(', ')}
+- **Requisitos**: ${knowledgeData.beneficios_asesores.bono_millonario.requisitos.join(', ')}
 
 ## ESTRUCTURA DEL PRODUCTO
-- Plazo: ${knowledgeData.estructura_producto.plazo}
-- Fianza: ${knowledgeData.estructura_producto.fianza}
-- Tasas: ${knowledgeData.estructura_producto.tasas}
-- Comisión corretaje: ${knowledgeData.estructura_producto.comision_corretaje}
+- **Plazo**: ${knowledgeData.estructura_producto.plazo}
+- **Fianza**: ${knowledgeData.estructura_producto.fianza}
+- **Tasas**: ${knowledgeData.estructura_producto.tasas}
+- **Comisión corretaje**: ${knowledgeData.estructura_producto.comision_corretaje}
 
 ## POLÍTICAS DE CRÉDITO
 ### Sujetos de crédito
@@ -176,22 +183,22 @@ ${knowledgeData.politicas_credito.sujetos_credito.map(s => `- ${s}`).join('\n')}
 ### NO sujetos de crédito
 ${knowledgeData.politicas_credito.no_sujetos_credito.map(s => `- ${s}`).join('\n')}
 
-### Archivos Requeridos
-**Pensionados:** ${knowledgeData.politicas_credito.archivos_requeridos.pensionados.join(', ')}
-**Fuerzas Militares/Policía:** ${knowledgeData.politicas_credito.archivos_requeridos.fuerzas_militares_policia.join(', ')}
-**Activos:** ${knowledgeData.politicas_credito.archivos_requeridos.activos.join(', ')}
+### Documentos Requeridos
+**Pensionados:** ${knowledgeData.documentos_requeridos.pensionados.join(', ')}
+**Activos:** ${knowledgeData.documentos_requeridos.activos.join(', ')}
+**Fuerzas Militares/Policía:** ${knowledgeData.documentos_requeridos.fuerzas_militares_policia.join(', ')}
 
 ## SEGUROS
-### Seguro Vida Deudor
+### Seguro de Vida Deudor
 - Coberturas: ${knowledgeData.seguros.seguro_vida_deudor.coberturas.join(', ')}
-- Edad ingreso: ${knowledgeData.seguros.seguro_vida_deudor.edad_ingreso}
+- Edad máxima de ingreso: ${knowledgeData.seguros.seguro_vida_deudor.edad_maxima_ingreso}
 
-### Seguro Accidentes Personales
+### Seguro de Accidentes Personales
 - Cobertura: ${knowledgeData.seguros.seguro_accidentes_personales.cobertura}
-- Planes: ${knowledgeData.seguros.seguro_accidentes_personales.planes.tipos}
-- Cobertura rango: ${knowledgeData.seguros.seguro_accidentes_personales.planes.cobertura_rango}
+- Planes disponibles: ${knowledgeData.seguros.seguro_accidentes_personales.planes.tipos}
+- Rango de cobertura: ${knowledgeData.seguros.seguro_accidentes_personales.planes.cobertura_rango}
 
-## CÁLCULO CAPACIDAD DE PAGO
+## CÁLCULO DE CAPACIDAD DE PAGO
 ${knowledgeData.calculo_capacidad_pago.definicion}
 
 ### Métodos de Cálculo
@@ -218,9 +225,6 @@ ${knowledgeData.codigo_etica.deberes_asesor.slice(0, 10).map(d => `- ${d}`).join
 
 ### Prohibiciones
 ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`).join('\n')}
-
-## GLOSARIO DE TÉRMINOS
-${Object.entries(knowledgeData.glosario).map(([termino, definicion]) => `- **${termino}**: ${definicion}`).join('\n')}
     `;
 
     // Crear el prompt para la IA
