@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    const { method } = event.httpMethod;
+    const method = event.httpMethod;
     const body = event.body ? JSON.parse(event.body) : {};
     const { sessionId, action, message, response } = body;
 
@@ -32,7 +32,10 @@ exports.handler = async (event, context) => {
 
     // Simular almacenamiento en memoria (en producción usar base de datos)
     // Para Netlify Functions, usaremos el contexto de la función
-    const chatHistories = global.chatHistories || {};
+    if (!global.chatHistories) {
+      global.chatHistories = {};
+    }
+    const chatHistories = global.chatHistories;
     
     if (method === 'POST') {
       if (action === 'save') {
