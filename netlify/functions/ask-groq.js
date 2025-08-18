@@ -28,8 +28,8 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    // Obtener la pregunta del body
-    const { question } = JSON.parse(event.body);
+    // Obtener la pregunta y sessionId del body
+    const { question, sessionId } = JSON.parse(event.body);
     
     if (!question) {
       return {
@@ -40,6 +40,27 @@ exports.handler = async (event, context) => {
         },
         body: JSON.stringify({ error: 'Question is required' })
       };
+    }
+
+    // Obtener contexto del historial de chat si existe sessionId
+    let chatContext = '';
+    if (sessionId) {
+      try {
+        // Simular obtención del contexto (usando el mismo almacenamiento que save-chat-history.js)
+        const chatHistories = global.chatHistories || {};
+        const history = chatHistories[sessionId];
+        
+        if (history && history.messages && history.messages.length > 0) {
+          // Tomar los últimos 6 mensajes para contexto
+          const recentMessages = history.messages.slice(-6);
+          chatContext = recentMessages.map(msg => 
+            `${msg.role === 'user' ? 'Usuario' : 'Asistente'}: ${msg.content}`
+          ).join('\n');
+        }
+      } catch (contextError) {
+        console.log('No se pudo obtener contexto del historial:', contextError.message);
+        // Continuar sin contexto si hay error
+      }
     }
 
     // Conocimiento base para asesores (extraído de asesores.json)
@@ -126,8 +147,28 @@ exports.handler = async (event, context) => {
       "estructura_producto": {
         "plazo": "Hasta 144 meses",
         "fianza": "7% (IVA incluido) - Garantía que respalda la obligación, tarifa única descontada al momento del desembolso",
-        "tasas": "De acuerdo al score crediticio del cliente",
+        "tasas": {
+          "descripcion": "De acuerdo al score crediticio del cliente",
+          "tasa_ejemplo": "1.85% N.M.V. (Nominal Mensual Vencida)",
+          "nota": "La tasa varía según el perfil crediticio del cliente"
+        },
         "comision_corretaje": "5% - Valor porcentual que paga el cliente por el estudio y administración del crédito"
+      },
+      "simulacion_credito": {
+        "ejemplo_calculo": {
+          "monto_solicitado": "$5,000,000",
+          "plazo_meses": 24,
+          "tasa_interes_mensual": "1.85% N.M.V.",
+          "cuota_mensual": "$259,885 COP",
+          "nota": "*Sujeto a términos y condiciones de viabilidad para el otorgamiento del crédito"
+        },
+        "formula_calculo": "Cuota = [Monto × (Tasa × (1 + Tasa)^Plazo)] / [(1 + Tasa)^Plazo - 1]",
+        "descuentos_aplicables": [
+          "Fianza: 7% del monto (descontado al desembolso)",
+          "Comisión de corretaje: 5% del monto",
+          "Seguro de vida deudor (opcional)",
+          "Seguro de accidentes personales (opcional)"
+        ]
       },
       "politicas_credito": {
         "sujetos_credito": ["Empleados y pensionados de entidades públicas, fuerzas militares y policía", "Clientes con un embargo en el desprendible", "Clientes con reportes negativos en centrales de riesgo o sin experiencia crediticia", "Personas de 18 años hasta 79 años 330 días", "Pensionados: procesos jurídicos de Cooperativas, fondos de empleados y cajas de compensación", "Empleados activos: todos los procesos jurídicos", "Clientes con cédula de extranjería (solo pensionados de entidades colombianas)"],
@@ -235,8 +276,24 @@ ${knowledgeData.beneficios_asesores.ventajas.map(v => `- ${v}`).join('\n')}
 ## ESTRUCTURA DEL PRODUCTO
 - **Plazo**: ${knowledgeData.estructura_producto.plazo}
 - **Fianza**: ${knowledgeData.estructura_producto.fianza}
-- **Tasas**: ${knowledgeData.estructura_producto.tasas}
+- **Tasas**: ${knowledgeData.estructura_producto.tasas.descripcion}
+  - Tasa ejemplo: ${knowledgeData.estructura_producto.tasas.tasa_ejemplo}
+  - Nota: ${knowledgeData.estructura_producto.tasas.nota}
 - **Comisión corretaje**: ${knowledgeData.estructura_producto.comision_corretaje}
+
+## SIMULACIÓN DE CRÉDITO
+### Ejemplo de Cálculo
+- **Monto solicitado**: ${knowledgeData.simulacion_credito.ejemplo_calculo.monto_solicitado}
+- **Plazo**: ${knowledgeData.simulacion_credito.ejemplo_calculo.plazo_meses} meses
+- **Tasa de interés**: ${knowledgeData.simulacion_credito.ejemplo_calculo.tasa_interes_mensual}
+- **Cuota mensual**: ${knowledgeData.simulacion_credito.ejemplo_calculo.cuota_mensual}
+- **Nota**: ${knowledgeData.simulacion_credito.ejemplo_calculo.nota}
+
+### Fórmula de Cálculo
+${knowledgeData.simulacion_credito.formula_calculo}
+
+### Descuentos Aplicables
+${knowledgeData.simulacion_credito.descuentos_aplicables.map(d => `- ${d}`).join('\n')}
 
 ## POLÍTICAS DE CRÉDITO
 ### Sujetos de crédito
@@ -289,8 +346,20 @@ ${knowledgeData.codigo_etica.deberes_asesor.slice(0, 10).map(d => `- ${d}`).join
 ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`).join('\n')}
     `;
 
-    // Crear el prompt para la IA
-    const prompt = `Eres un asesor experto de Bayport Colombia. Responde en máximo 60 palabras usando el siguiente contexto:\n${KNOWLEDGE}\n\nPregunta: ${question}`;
+    // Crear el prompt para la IA incluyendo contexto del historial si existe
+    let prompt = `Eres un asesor experto de Bayport Colombia. Responde en máximo 60 palabras usando el siguiente contexto:\n${KNOWLEDGE}`;
+    
+    // Agregar contexto del historial de chat si existe
+    if (chatContext) {
+      prompt += `\n\n## CONTEXTO DE LA CONVERSACIÓN ANTERIOR:\n${chatContext}`;
+    }
+    
+    prompt += `\n\nPregunta: ${question}`;
+    
+    // Si hay contexto, dar instrucciones adicionales para mantener coherencia
+    if (chatContext) {
+      prompt += `\n\nNOTA: Considera el contexto de la conversación anterior para dar una respuesta coherente y personalizada.`;
+    }
 
     // Llamar a la API de Groq usando la variable de entorno
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
