@@ -358,11 +358,6 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
       prompt += `\n\nNOTA: Considera el contexto de la conversación anterior para dar una respuesta coherente y personalizada.`;
     }
 
-    // Verificar que la API key esté configurada
-    if (!process.env.GROQ_API_KEY) {
-      throw new Error('GROQ_API_KEY no está configurada en las variables de entorno');
-    }
-
     // Llamar a la API de Groq usando la variable de entorno
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -381,8 +376,7 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
     const data = await response.json();
     
     if (!response.ok) {
-      console.error('Groq API Error:', data);
-      throw new Error(`Groq API error: ${data.error?.message || response.statusText || 'Unknown error'}`);
+      throw new Error(`Groq API error: ${data.error?.message || 'Unknown error'}`);
     }
 
     const aiResponse = data.choices?.[0]?.message?.content || 'Sin respuesta disponible';
@@ -394,17 +388,13 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
     };
 
   } catch (error) {
-    console.error('Error completo:', error);
-    console.error('Error message:', error.message);
-    console.error('Error stack:', error.stack);
-    
+    console.error('Error:', error);
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({ 
         error: 'Error interno del servidor',
-        message: error.message || 'No se pudo procesar la consulta. Intenta nuevamente.',
-        details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+        message: 'No se pudo procesar la consulta. Intenta nuevamente.' 
       })
     };
   }
