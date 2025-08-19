@@ -400,7 +400,16 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
     }
     
     prompt += `\n\nIMPORTANTE PARA SIMULACIONES DE CRÉDITO:\n\n## FÓRMULA MATEMÁTICA CORRECTA (Sistema Francés - PMT):\nCuota = Monto × [Tasa × (1 + Tasa)^Plazo] / [(1 + Tasa)^Plazo - 1]\n\nEsta es la fórmula estándar del sistema francés para calcular cuotas de crédito, exactamente igual a la implementada en el simulador oficial.\n\nDonde:\n- Cuota = cuota mensual a calcular\n- Monto = monto del préstamo (capital solicitado)\n- Tasa = tasa de interés mensual en decimal (ejemplo: 1.85% = 0.0185)\n- Plazo = número total de meses\n\n## INSTRUCCIONES DE CÁLCULO:\n1. Usa la tasa de interés que proporcione el usuario o, si no la especifica, usa 1.85% N.M.V. (0.0185) como referencia típica\n2. Aplica la fórmula EXACTAMENTE como se muestra: Monto × [Tasa × (1 + Tasa)^Plazo] / [(1 + Tasa)^Plazo - 1]\n3. Redondea el resultado final a pesos colombianos (sin decimales) usando Math.round()\n4. Siempre muestra el cálculo paso a paso cuando sea solicitado\n5. Esta fórmula es idéntica a la del simulador oficial y garantiza resultados correctos\n\n## EJEMPLOS DE APLICACIÓN:\n\n**Ejemplo con $12,000,000 a 36 meses al 1.85% N.M.V.:**\n- Monto = 12,000,000\n- Tasa = 0.0185\n- Plazo = 36\n- Cuota = 12,000,000 × [0.0185 × (1.0185)^36] / [(1.0185)^36 - 1]\n- Cuota = $459,528 COP\n\n**Ejemplo con $10,000,000 a 24 meses al 1.85% N.M.V.:**
-- Cuota = $519,770 COP\n\n## CAPACIDAD REQUERIDA:\nDebes poder calcular simulaciones para CUALQUIER monto, CUALQUIER plazo y CUALQUIER tasa que solicite el usuario. La fórmula es flexible y precisa.\n\nPregunta del usuario: ${question}`;
+- Cuota = $519,770 COP
+
+**Ejemplo con $13,000,000 a 72 meses al 1.85% N.M.V.:**
+- Monto = 13,000,000
+- Tasa = 0.0185
+- Plazo = 72
+- Cuota = 13,000,000 × [0.0185 × (1.0185)^72] / [(1.0185)^72 - 1]
+- Cuota = $328,185 COP
+
+## CAPACIDAD REQUERIDA:\nDebes poder calcular simulaciones para CUALQUIER monto, CUALQUIER plazo y CUALQUIER tasa que solicite el usuario. La fórmula es flexible y precisa.\n\nPregunta del usuario: ${question}`;
     
     // Si hay contexto, dar instrucciones adicionales para mantener coherencia
     if (chatContext) {
