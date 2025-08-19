@@ -95,7 +95,18 @@
     "plazo": "Hasta 144 meses",
     "fianza": "7% (IVA incluido) - Garantía que respalda la obligación, tarifa única descontada al momento del desembolso",
     "tasas": "De acuerdo al score crediticio del cliente",
-    "comision_corretaje": "5% - Valor porcentual que paga el cliente por el estudio y administración del crédito"
+    "comision_corretaje": "5% - Valor porcentual que paga el cliente por el estudio y administración del crédito",
+    "simulacion_credito": {
+      "ejemplo_calculo": {
+        "monto_solicitado": "$12,000,000",
+        "plazo_meses": 36,
+        "tasa_interes_mensual": "1.85% N.M.V.",
+        "cuota_mensual": "$459,528 COP",
+        "nota": "*Sujeto a términos y condiciones de viabilidad para el otorgamiento del crédito"
+      },
+      "formula_calculo": "Cuota = [Monto × (Tasa × (1 + Tasa)^Plazo)] / [(1 + Tasa)^Plazo - 1]",
+      "formula_explicacion": "Para calcular correctamente: Tasa mensual = 1.85% = 0.0185. Ejemplo: $12,000,000 a 36 meses = $459,528 COP de cuota mensual"
+    }
   },
   "politicas_credito": {
     "sujetos_credito": ["Empleados y pensionados de entidades públicas, fuerzas militares y policía", "Clientes con un embargo en el desprendible", "Clientes con reportes negativos en centrales de riesgo o sin experiencia crediticia", "Personas de 18 años hasta 79 años 330 días", "Pensionados: procesos jurídicos de Cooperativas, fondos de empleados y cajas de compensación", "Empleados activos: todos los procesos jurídicos", "Clientes con cédula de extranjería (solo pensionados de entidades colombianas)"],

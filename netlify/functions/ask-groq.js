@@ -360,10 +360,10 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
     // Agregar contexto del historial de chat si existe
     if (chatContext) {
       prompt += `\n\n## CONTEXTO DE LA CONVERSACIÓN ANTERIOR:\n${chatContext}`;
-      prompt += `\n\nIMPORTANTE: Mantén la coherencia con la conversación anterior. Si el usuario ya te dio su nombre u otra información personal, recuérdala y úsala en tu respuesta.`;
+      prompt += `\n\nIMPORTANTE: Mantén la coherencia con la conversación anterior. Si el usuario ya te dio su nombre, NO lo repitas en cada respuesta a menos que sea necesario para la conversación. Sé natural y conversacional.`;
     }
     
-    prompt += `\n\nPregunta actual: ${question}`;
+    prompt += `\n\nIMPORTANTE PARA CÁLCULOS DE CRÉDITO:\nCuando calcules cuotas de crédito, usa EXACTAMENTE esta fórmula:\nCuota = [Monto × (Tasa × (1 + Tasa)^Plazo)] / [(1 + Tasa)^Plazo - 1]\nDonde Tasa = porcentaje mensual en decimal (ej: 1.85% = 0.0185)\nEjemplo verificado: $12,000,000 a 36 meses con 1.85% mensual = $459,528 COP\n\nPregunta del usuario: ${question}`;
     
     // Si hay contexto, dar instrucciones adicionales para mantener coherencia
     if (chatContext) {

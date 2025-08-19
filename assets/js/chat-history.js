@@ -40,8 +40,7 @@ class ChatHistory {
 
             return true;
         } catch (error) {
-            console.error('Error guardando mensaje:', error);
-            return false;
+            // Error guardando mensaje - fallback silencioso
         }
     }
 
@@ -60,7 +59,7 @@ class ChatHistory {
             
             localStorage.setItem(this.localStorageKey, JSON.stringify(history));
         } catch (error) {
-            console.error('Error guardando en localStorage:', error);
+            // Error guardando en localStorage - fallback silencioso
         }
     }
 
@@ -222,8 +221,7 @@ class ChatHistory {
 
             return true;
         } catch (error) {
-            console.error('Error limpiando historial:', error);
-            return false;
+            // Error limpiando historial - fallback silencioso
         }
     }
 
