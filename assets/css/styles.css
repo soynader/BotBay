@@ -137,7 +137,7 @@ main {
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  padding-bottom: 120px; /* Más espacio para el teclado móvil */
+  padding-bottom: 60px; /* Más espacio para el teclado móvil */
 }
 
 #messages {
@@ -241,7 +241,7 @@ footer {
   }
   
   main {
-    padding: .5rem .5rem 140px; /* Combinado: top/sides bottom */
+    padding: .5rem .5rem 70px; /* Combinado: top/sides bottom */
   }
   
   #messages > div {
@@ -291,13 +291,13 @@ footer {
   /* Cuando el viewport se reduce (teclado visible) */
   @supports (-webkit-touch-callout: none) {
     main {
-      padding-bottom: 160px;
+      padding-bottom: 80px;
     }
   }
   
   /* Asegurar que el scroll funcione correctamente */
   body {
     height: 100vh;
-    height: 120dvh; /* Dynamic viewport height para móviles */
+    height: 100dvh; /* Dynamic viewport height para móviles */
   }
 }
