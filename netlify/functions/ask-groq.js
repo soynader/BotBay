@@ -409,15 +409,21 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
     const esSimulacion = /simula|cuota|mensual|pago|crédito|préstamo|\$|cop|monto|plazo|meses|interés|tasa/i.test(question);
     
     if (esSimulacion) {
-      // Extraer números de la pregunta
-      const montos = question.match(/\$?([0-9]{1,3}(?:[.,][0-9]{3})*(?:[.,][0-9]+)?)/g);
-      const plazos = question.match(/(\d+)\s*mes/i);
-      const tasas = question.match(/(\d+[.,]?\d*)\s*%/i);
+      // Extraer números de la pregunta con regex mejorada
+      const montoMatch = question.match(/([0-9]+(?:[.,][0-9]{3})*(?:[.,][0-9]+)?)/g);
+      const plazoMatch = question.match(/(\d+)\s*mes/i);
+      const tasaMatch = question.match(/(\d+[.,]?\d*)\s*%/i);
       
-      if (montos && plazos) {
-        const monto = parseFloat(montos[0].replace(/[^0-9]/g, ''));
-        const plazo = parseInt(plazos[1]);
-        const tasa = tasas ? parseFloat(tasas[1].replace(',', '.')) / 100 : 0.0185;
+      if (montoMatch && plazoMatch) {
+        // Encontrar el número más grande (probablemente el monto)
+        let monto = 0;
+        for (const match of montoMatch) {
+          const num = parseFloat(match.replace(/[.,]/g, ''));
+          if (num > monto) monto = num;
+        }
+        
+        const plazo = parseInt(plazoMatch[1]);
+        const tasa = tasaMatch ? parseFloat(tasaMatch[1].replace(',', '.')) / 100 : 0.0185;
         
         if (monto > 0 && plazo > 0) {
           const cuota = calcularCuotaMensual(monto, plazo, tasa);
