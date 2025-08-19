@@ -43,16 +43,27 @@ exports.handler = async (event, context) => {
     let chatContext = '';
     if (sessionId) {
       try {
-        // Simular obtención del contexto (usando el mismo almacenamiento que save-chat-history.js)
-        const chatHistories = global.chatHistories || {};
-        const history = chatHistories[sessionId];
-        
-        if (history && history.messages && history.messages.length > 0) {
-          // Tomar los últimos 6 mensajes para contexto
-          const recentMessages = history.messages.slice(-6);
-          chatContext = recentMessages.map(msg => 
-            `${msg.role === 'user' ? 'Usuario' : 'Asistente'}: ${msg.content}`
-          ).join('\n');
+        // Obtener historial desde la función save-chat-history
+        const historyResponse = await fetch(`${process.env.URL || 'http://localhost:8888'}/.netlify/functions/save-chat-history`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            sessionId: sessionId,
+            action: 'get'
+          })
+        });
+
+        if (historyResponse.ok) {
+          const historyData = await historyResponse.json();
+          if (historyData.history && historyData.history.messages && historyData.history.messages.length > 0) {
+            // Tomar los últimos 8 mensajes para contexto (más contexto)
+            const recentMessages = historyData.history.messages.slice(-8);
+            chatContext = recentMessages.map(msg => 
+              `${msg.role === 'user' ? 'Usuario' : 'Asistente'}: ${msg.content}`
+            ).join('\n');
+          }
         }
       } catch (contextError) {
         console.log('No se pudo obtener contexto del historial:', contextError.message);
@@ -344,18 +355,21 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
     `;
 
     // Crear el prompt para la IA incluyendo contexto del historial si existe
-    let prompt = `Eres un asesor experto de Bayport Colombia. Responde en máximo 60 palabras usando el siguiente contexto:\n${KNOWLEDGE}`;
+    let prompt = `Eres un asesor experto de Bayport Colombia. Responde de manera conversacional y personalizada usando el siguiente contexto:\n${KNOWLEDGE}`;
     
     // Agregar contexto del historial de chat si existe
     if (chatContext) {
       prompt += `\n\n## CONTEXTO DE LA CONVERSACIÓN ANTERIOR:\n${chatContext}`;
+      prompt += `\n\nIMPORTANTE: Mantén la coherencia con la conversación anterior. Si el usuario ya te dio su nombre u otra información personal, recuérdala y úsala en tu respuesta.`;
     }
     
-    prompt += `\n\nPregunta: ${question}`;
+    prompt += `\n\nPregunta actual: ${question}`;
     
     // Si hay contexto, dar instrucciones adicionales para mantener coherencia
     if (chatContext) {
-      prompt += `\n\nNOTA: Considera el contexto de la conversación anterior para dar una respuesta coherente y personalizada.`;
+      prompt += `\n\nRespuesta (máximo 80 palabras, mantén el contexto y personaliza con la información que ya conoces del usuario):`;
+    } else {
+      prompt += `\n\nRespuesta (máximo 80 palabras):`;
     }
 
     // Verificar que la API key esté configurada
@@ -373,8 +387,8 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
       body: JSON.stringify({
         model: 'llama3-70b-8192',
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 120,
-        temperature: 0.2
+        max_tokens: 150,
+        temperature: 0.3
       })
     });
 
