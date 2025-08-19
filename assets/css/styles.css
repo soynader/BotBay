@@ -137,7 +137,7 @@ main {
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  padding-bottom: 60px; /* Más espacio para el teclado móvil */
+  padding-bottom: 90px; /* Más espacio para el teclado móvil */
 }
 
 #messages {
@@ -241,7 +241,7 @@ footer {
   }
   
   main {
-    padding: .5rem .5rem 70px; /* Combinado: top/sides bottom */
+    padding: .5rem .5rem 105px; /* Combinado: top/sides bottom */
   }
   
   #messages > div {
@@ -291,7 +291,7 @@ footer {
   /* Cuando el viewport se reduce (teclado visible) */
   @supports (-webkit-touch-callout: none) {
     main {
-      padding-bottom: 80px;
+      padding-bottom: 120px;
     }
   }
   
