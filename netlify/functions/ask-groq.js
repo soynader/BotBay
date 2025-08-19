@@ -1,19 +1,20 @@
 const fetch = require('node-fetch');
 
+// Headers CORS reutilizables
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Content-Type': 'application/json'
+};
+
 exports.handler = async (event, context) => {
-  // Configurar CORS headers
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Content-Type': 'application/json'
-  };
 
   // Manejar preflight CORS
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
-      headers,
+      headers: CORS_HEADERS,
       body: ''
     };
   }
@@ -22,7 +23,7 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      headers,
+      headers: CORS_HEADERS,
       body: JSON.stringify({ error: 'Method not allowed' })
     };
   }
@@ -34,7 +35,7 @@ exports.handler = async (event, context) => {
     if (!question) {
       return {
         statusCode: 400,
-        headers,
+        headers: CORS_HEADERS,
         body: JSON.stringify({ error: 'Question is required' })
       };
     }
@@ -431,7 +432,7 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
           
           return {
             statusCode: 200,
-            headers,
+            headers: CORS_HEADERS,
             body: JSON.stringify({ response: respuesta })
           };
         }
@@ -478,7 +479,7 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
 
     return {
       statusCode: 200,
-      headers,
+      headers: CORS_HEADERS,
       body: JSON.stringify({ response: aiResponse })
     };
 
@@ -489,7 +490,7 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
     
     return {
       statusCode: 500,
-      headers,
+      headers: CORS_HEADERS,
       body: JSON.stringify({ 
         error: 'Error interno del servidor',
         message: error.message || 'No se pudo procesar la consulta. Intenta nuevamente.',

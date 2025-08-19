@@ -1,17 +1,18 @@
+// Headers CORS reutilizables
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Content-Type': 'application/json'
+};
+
 exports.handler = async (event, context) => {
-  // Configurar CORS headers
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-    'Content-Type': 'application/json'
-  };
 
   // Manejar preflight OPTIONS request
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
-      headers,
+      headers: CORS_HEADERS,
       body: ''
     };
   }
@@ -25,7 +26,7 @@ exports.handler = async (event, context) => {
     if (!sessionId) {
       return {
         statusCode: 400,
-        headers,
+        headers: CORS_HEADERS,
         body: JSON.stringify({ error: 'sessionId es requerido' })
       };
     }
@@ -43,7 +44,7 @@ exports.handler = async (event, context) => {
         if (!message) {
           return {
             statusCode: 400,
-            headers,
+            headers: CORS_HEADERS,
             body: JSON.stringify({ error: 'message es requerido para guardar' })
           };
         }
@@ -78,7 +79,7 @@ exports.handler = async (event, context) => {
 
         return {
           statusCode: 200,
-          headers,
+          headers: CORS_HEADERS,
           body: JSON.stringify({ 
             success: true, 
             message: 'Historial guardado correctamente',
@@ -98,7 +99,7 @@ exports.handler = async (event, context) => {
 
         return {
           statusCode: 200,
-          headers,
+          headers: CORS_HEADERS,
           body: JSON.stringify({ 
             success: true, 
             history 
@@ -115,7 +116,7 @@ exports.handler = async (event, context) => {
 
         return {
           statusCode: 200,
-          headers,
+          headers: CORS_HEADERS,
           body: JSON.stringify({ 
             success: true, 
             message: 'Historial limpiado correctamente' 
@@ -129,7 +130,7 @@ exports.handler = async (event, context) => {
         if (!history || history.messages.length === 0) {
           return {
             statusCode: 200,
-            headers,
+            headers: CORS_HEADERS,
             body: JSON.stringify({ 
               success: true, 
               context: '' 
@@ -145,7 +146,7 @@ exports.handler = async (event, context) => {
 
         return {
           statusCode: 200,
-          headers,
+          headers: CORS_HEADERS,
           body: JSON.stringify({ 
             success: true, 
             context: contextString,
@@ -157,7 +158,7 @@ exports.handler = async (event, context) => {
       else {
         return {
           statusCode: 400,
-          headers,
+          headers: CORS_HEADERS,
           body: JSON.stringify({ error: 'Acción no válida. Use: save, get, clear, o getContext' })
         };
       }
@@ -166,7 +167,7 @@ exports.handler = async (event, context) => {
     else {
       return {
         statusCode: 405,
-        headers,
+        headers: CORS_HEADERS,
         body: JSON.stringify({ error: 'Método no permitido. Use POST' })
       };
     }
@@ -175,7 +176,7 @@ exports.handler = async (event, context) => {
     console.error('Error en save-chat-history:', error);
     return {
       statusCode: 500,
-      headers,
+      headers: CORS_HEADERS,
       body: JSON.stringify({ 
         error: 'Error interno del servidor',
         details: error.message 

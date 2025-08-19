@@ -73,8 +73,10 @@ async function loadChatHistory() {
       }
     });
     
-    // Scroll al final
-    messages.scrollTop = messages.scrollHeight;
+    // Scroll al final con función mejorada
+    setTimeout(() => {
+      scrollToBottom();
+    }, 100);
     
   } catch (error) {
     // Error cargando historial - fallback silencioso
@@ -110,7 +112,13 @@ async function sendMessage() {
     // Rehabilitar input
     input.disabled = false;
     sendBtn.disabled = false;
-    input.focus();
+    
+    // Enfocar input con delay para evitar problemas en móvil
+    setTimeout(() => {
+      input.focus();
+      // Asegurar scroll después del focus
+      scrollToBottom();
+    }, 200);
   }
 }
 
@@ -119,6 +127,20 @@ function appendMessage(text, cls, saveToHistory = true) {
   div.className = cls;
   div.textContent = text;
   messages.appendChild(div);
+  
+  // Scroll mejorado con delay para asegurar visibilidad
+  setTimeout(() => {
+    scrollToBottom();
+  }, 100);
+}
+
+// Función mejorada para scroll al final
+function scrollToBottom() {
+  const main = document.querySelector('main');
+  if (main) {
+    main.scrollTop = main.scrollHeight;
+  }
+  // Fallback para el contenedor de mensajes
   messages.scrollTop = messages.scrollHeight;
 }
 

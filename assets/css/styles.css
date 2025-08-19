@@ -137,7 +137,7 @@ main {
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  padding-bottom: 90px;
+  padding-bottom: 120px; /* Más espacio para el teclado móvil */
 }
 
 #messages {
@@ -241,8 +241,7 @@ footer {
   }
   
   main {
-    padding: .5rem;
-    padding-bottom: 100px;
+    padding: .5rem .5rem 140px; /* Combinado: top/sides bottom */
   }
   
   #messages > div {
@@ -284,5 +283,21 @@ footer {
   textarea:focus,
   input:focus {
     font-size: 16px;
+  }
+}
+
+/* Mejoras para teclado virtual móvil */
+@media (max-width: 768px) {
+  /* Cuando el viewport se reduce (teclado visible) */
+  @supports (-webkit-touch-callout: none) {
+    main {
+      padding-bottom: 160px;
+    }
+  }
+  
+  /* Asegurar que el scroll funcione correctamente */
+  body {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height para móviles */
   }
 }
