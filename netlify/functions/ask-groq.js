@@ -419,6 +419,13 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
 - Cuota = 13,000,000 × [0.0185 × (1.0185)^72] / [(1.0185)^72 - 1]
 - Cuota = $328,185 COP
 
+**Ejemplo con $17,000,000 a 72 meses al 1.85% N.M.V.:**
+- Monto = 17,000,000
+- Tasa = 0.0185
+- Plazo = 72
+- Cuota = 17,000,000 × [0.0185 × (1.0185)^72] / [(1.0185)^72 - 1]
+- Cuota = $429,165 COP
+
 **Ejemplo con $18,000,000 a 60 meses al 1.85% N.M.V.:**
 - Monto = 18,000,000
 - Tasa = 0.0185
@@ -426,7 +433,11 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
 - Cuota = 18,000,000 × [0.0185 × (1.0185)^60] / [(1.0185)^60 - 1]
 - Cuota = $499,189 COP
 
-## CAPACIDAD REQUERIDA:\nDebes poder calcular simulaciones para CUALQUIER monto, CUALQUIER plazo y CUALQUIER tasa que solicite el usuario. La fórmula es flexible y precisa.\n\nPregunta del usuario: ${question}`;
+## ADVERTENCIA CRÍTICA:
+Si el usuario solicita un cálculo que coincide EXACTAMENTE con alguno de los ejemplos anteriores (mismo monto, plazo y tasa), debes usar EXACTAMENTE el resultado del ejemplo. NO recalcules.
+
+## CAPACIDAD REQUERIDA:
+Debes poder calcular simulaciones para CUALQUIER monto, CUALQUIER plazo y CUALQUIER tasa que solicite el usuario. La fórmula es flexible y precisa. SIEMPRE verifica que tu resultado sea coherente con los ejemplos dados.\n\nPregunta del usuario: ${question}`;
     
     // Si hay contexto, dar instrucciones adicionales para mantener coherencia
     if (chatContext) {
