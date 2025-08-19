@@ -354,6 +354,24 @@ ${knowledgeData.codigo_etica.deberes_asesor.slice(0, 10).map(d => `- ${d}`).join
 ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`).join('\n')}
     `;
 
+    // Detectar si el usuario menciona su nombre en la pregunta actual
+    const namePattern = /(?:me llamo|mi nombre es|soy|mi nombre|llamarme)\s+([A-Za-zÁÉÍÓÚáéíóúÑñ]+)/i;
+    const nameMatch = question.match(namePattern);
+    let detectedName = null;
+    
+    if (nameMatch) {
+      detectedName = nameMatch[1].charAt(0).toUpperCase() + nameMatch[1].slice(1).toLowerCase();
+    }
+    
+    // Buscar nombre en el historial de chat si no se detectó en la pregunta actual
+    let userName = detectedName;
+    if (!userName && chatContext) {
+      const historyNameMatch = chatContext.match(/(?:me llamo|mi nombre es|soy|mi nombre|llamarme)\s+([A-Za-zÁÉÍÓÚáéíóúÑñ]+)/i);
+      if (historyNameMatch) {
+        userName = historyNameMatch[1].charAt(0).toUpperCase() + historyNameMatch[1].slice(1).toLowerCase();
+      }
+    }
+    
     // Crear el prompt para la IA incluyendo contexto del historial si existe
     let prompt = `Eres un asesor experto de Bayport Colombia. Responde de manera conversacional y personalizada usando el siguiente contexto:\n${KNOWLEDGE}`;
     
@@ -363,7 +381,25 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
       prompt += `\n\nIMPORTANTE: Mantén la coherencia con la conversación anterior. Si el usuario ya te dio su nombre, NO lo repitas en cada respuesta a menos que sea necesario para la conversación. Sé natural y conversacional.`;
     }
     
-    prompt += `\n\nIMPORTANTE PARA CÁLCULOS DE CRÉDITO:\nCuando calcules cuotas de crédito, usa EXACTAMENTE esta fórmula:\nCuota = [Monto × (Tasa × (1 + Tasa)^Plazo)] / [(1 + Tasa)^Plazo - 1]\nDonde Tasa = porcentaje mensual en decimal (ej: 1.85% = 0.0185)\nEjemplo verificado: $12,000,000 a 36 meses con 1.85% mensual = $459,528 COP\n\nPregunta del usuario: ${question}`;
+    // Agregar instrucciones de personalización de saludo solo para el primer mensaje
+    const isFirstMessage = !chatContext || chatContext.trim() === '';
+    
+    if (isFirstMessage) {
+      if (userName) {
+        prompt += `\n\n## INSTRUCCIONES DE PERSONALIZACIÓN:\nEste es el primer mensaje de la conversación. El usuario se llama ${userName}. Inicia tu respuesta con "¡Hola ${userName}!" seguido de tu respuesta normal. En mensajes posteriores, NO repitas el saludo, sé natural y conversacional.`;
+      } else {
+        prompt += `\n\n## INSTRUCCIONES DE PERSONALIZACIÓN:\nEste es el primer mensaje de la conversación. El usuario no ha mencionado su nombre. Inicia tu respuesta con "¡Hola!" seguido de tu respuesta normal. En mensajes posteriores, NO repitas el saludo, sé natural y conversacional.`;
+      }
+    } else {
+      // Para mensajes posteriores, ser natural sin saludos repetitivos
+      if (userName) {
+        prompt += `\n\n## INSTRUCCIONES DE PERSONALIZACIÓN:\nEl usuario se llama ${userName}. Responde de manera natural y conversacional. NO uses saludos repetitivos. Puedes usar su nombre ocasionalmente cuando sea apropiado para la conversación.`;
+      } else {
+        prompt += `\n\n## INSTRUCCIONES DE PERSONALIZACIÓN:\nResponde de manera natural y conversacional. NO uses saludos repetitivos.`;
+      }
+    }
+    
+    prompt += `\n\nIMPORTANTE PARA CÁLCULOS DE CRÉDITO:\nUsa EXACTAMENTE esta fórmula matemática:\nC = P × [i × (1+i)^n] / [(1+i)^n - 1]\nDonde:\n- C = cuota mensual\n- P = monto del préstamo (capital)\n- i = tasa de interés mensual en decimal\n- n = número total de meses\n\nEjemplo verificado:\nP = 16,000,000 COP\nTasa N.M.V.: 1.85% = 0.0185\nPlazo: 72 meses\nC = 16,000,000 × [0.0185 × (1+0.0185)^72] / [(1+0.0185)^72 - 1] = 403,920 COP\n\nNOTA: Si la tasa es E.A. (efectiva anual), convertir primero: i = (1 + i_EA)^(1/12) - 1\nSi es N.M.V. (nominal mes vencido), usar directamente.\n\nPregunta del usuario: ${question}`;
     
     // Si hay contexto, dar instrucciones adicionales para mantener coherencia
     if (chatContext) {
