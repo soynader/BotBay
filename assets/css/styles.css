@@ -83,6 +83,7 @@ header h1 {
   font-size: 0.7rem;
   color: var(--subtle);
   margin-left: 0.5rem;
+  display: none; /* oculto por defecto */
 }
 
 /* ========================================
@@ -261,14 +262,16 @@ footer {
   body {
     max-width: 600px;
     margin: 0 auto;
-    left: 50%;
-    transform: translateX(-50%);
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
   }
   
   footer {
     max-width: 600px;
     left: 50%;
     transform: translateX(-50%);
+    width: 100%;
   }
 }
 
@@ -282,3 +285,2402 @@ footer {
     font-size: 16px;
   }
 }
+
+/* Marca / Logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand .logo {
+  height: 28px; /* tamaño consistente del icono */
+  width: auto;  /* mantiene proporción del SVG */
+  display: block;
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el layout */
+    left: auto;
+    transform: none;
+  }
+  
+  footer {
+    max-width: 600px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+}
+
+/* ========================================
+   CORRECCIONES ESPECÍFICAS
+   ======================================== */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+    /* Quitar desplazamiento manual que descentraba el

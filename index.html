@@ -11,9 +11,14 @@
 </head>
 <body>
   <header>
-    <h1>CrediGestro</h1>
+    <div class="brand">
+      <a href="/" aria-label="Inicio">
+        <img src="/favicon.svg" alt="CrediGestor" class="logo" loading="eager"/>
+      </a>
+    </div>
     <div class="header-controls">
       <button id="newChatBtn" class="control-btn" title="Nueva conversación">🗨️ Nueva</button>
+      <button id="simuladorBtn" class="control-btn" title="Simulador de Crédito">🧮 Simulador</button>
       <button id="clearHistoryBtn" class="control-btn" title="Limpiar historial">🗑️ Limpiar</button>
       <span id="sessionInfo" class="session-info"></span>
     </div>

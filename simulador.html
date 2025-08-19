@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Simulador de Crédito</title>
+  <style>
+    :root{
+      --bg: #0a0a0a;
+      --surface: #1a1a1a;
+      --surface2: #2a2a2a;
+      --text: #ffffff;
+      --subtle: #888888;
+      --accent: #d4c00f;
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); padding: 20px; margin:0; overflow-x: hidden; }
+    .simulador { max-width: 600px; margin: auto; background: var(--surface); padding: 20px; border-radius: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); border:1px solid var(--surface2); }
+    .simulador h2 { margin-bottom: 20px; text-align: center; }
+    label { display: block; margin-top: 15px; font-weight: 600; }
+    input, select { width: 100%; padding: 10px; margin-top: 6px; border: 1px solid var(--surface2); border-radius: 8px; font-size: 16px; background: var(--surface2); color: var(--text); }
+    .btn { margin-top: 20px; width: 100%; padding: 12px; background: var(--accent); color: #000; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; }
+    .btn:hover { filter: brightness(1.1); }
+    .resultados { margin-top: 25px; padding: 15px; background: var(--surface2); border-radius: 8px; }
+    .row { display: flex; justify-content: space-between; margin: 8px 0; }
+    .label { font-weight: bold; }
+    .topbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+    .back-btn{ background: var(--surface2); color: var(--text); border:none; padding:6px 10px; border-radius:6px; cursor:pointer; }
+    .back-btn:hover{ background: var(--accent); color:#000; }
+
+    /* Header de la página simulador */
+    .page-header { 
+      position: sticky; top: 0; z-index: 10; 
+      background: var(--surface); 
+      padding: .8rem 1rem; 
+      border-bottom: 1px solid var(--surface2); 
+      display: flex; justify-content: space-between; align-items: center; 
+    }
+    .page-header h1 { margin: 0; font-size: 1.1rem; font-weight: 600; }
+
+    /* Inputs no sobresalgan */
+    input, select { box-sizing: border-box; max-width: 100%; width: 100%; }
+    .simulador { max-width: 600px; width: calc(100% - 16px); margin: 12px auto; }
+
+    /* Contener el botón dentro del ancho */
+    .btn { display: inline-block; width: 100%; box-sizing: border-box; }
+
+    @media (max-width: 600px) {
+      body { padding: 14px; }
+      .simulador { padding: 16px; border-radius: 10px; width: 100%; margin: 10px auto; }
+      .simulador h2 { font-size: 1.2rem; }
+      label { margin-top: 12px; font-size: 0.95rem; }
+      input, select { padding: 12px; font-size: 16px; } /* evita zoom en iOS */
+      .btn { padding: 12px; font-size: 1rem; }
+      .row { flex-direction: column; align-items: flex-start; gap: 4px; }
+      .topbar { gap: 8px; }
+    }
+
+    @media (max-width: 400px) {
+      body { padding: 10px; }
+      .simulador { padding: 14px; }
+      .back-btn { padding: 8px 10px; }
+      .simulador h2 { font-size: 1.05rem; }
+    }
+
+    /* Evitar zoom al enfocar inputs en navegadores WebKit */
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      select:focus,
+      textarea:focus,
+      input:focus { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <button class="back-btn" onclick="window.location.href='/'">← Volver</button>
+    <h1>Simulador</h1>
+    <div style="width:60px"></div>
+  </header>
+  <div class="simulador">
+    
+    <form id="formSimulador">
+      <label for="monto">Monto solicitado (COP)</label>
+      <input type="text" id="monto" placeholder="Ej: 12.000.000" required>
+
+      <label for="plazo">Plazo (meses)</label>
+      <select id="plazo">
+        <option value="12">12</option>
+        <option value="24">24</option>
+        <option value="36">36</option>
+        <option value="48">48</option>
+        <option value="60">60</option>
+        <option value="72">72</option>
+        <option value="84">84</option>
+        <option value="96">96</option>
+        <option value="108">108</option>
+        <option value="120">120</option>
+      </select>
+
+      <label for="tasa">Interés mensual (N.M.V.)</label>
+      <input type="number" step="0.0001" id="tasa" value="0.0185" required>
+
+      <button type="submit" class="btn">Simular</button>
+    </form>
+
+    <div class="resultados" id="resultados" style="display:none;">
+      <div class="row"><span class="label">Monto solicitado:</span> <span id="resMonto"></span></div>
+      <div class="row"><span class="label">Tasa de interés:</span> <span id="resTasa"></span></div>
+      <div class="row"><span class="label">Plazo:</span> <span id="resPlazo"></span></div>
+      <div class="row"><span class="label">Cuota mensual:</span> <span id="resCuota"></span></div>
+    </div>
+  </div>
+
+  <script>
+    // Formatear el campo monto con separadores de miles
+    const montoInput = document.getElementById("monto");
+    montoInput.addEventListener("input", function(e) {
+      let value = this.value.replace(/\./g, "").replace(/[^0-9]/g, ""); // eliminar puntos y no números
+      if (value) {
+        this.value = parseInt(value, 10).toLocaleString("es-CO"); // formato con puntos
+      } else {
+        this.value = "";
+      }
+    });
+
+    document.getElementById("formSimulador").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // Convertir texto con puntos a número
+      const monto = parseFloat(montoInput.value.replace(/\./g, ""));
+      const plazo = parseInt(document.getElementById("plazo").value);
+      const tasa = parseFloat(document.getElementById("tasa").value); // Ej: 0.0185 = 1.85%
+
+      if (isNaN(monto) || isNaN(plazo) || isNaN(tasa) || monto <= 0 || plazo <= 0) {
+        alert("Por favor ingresa valores válidos.");
+        return;
+      }
+
+      // Fórmula PMT (sistema francés)
+      const cuota = monto * (tasa * Math.pow(1 + tasa, plazo)) / (Math.pow(1 + tasa, plazo) - 1);
+
+      // Mostrar resultados
+      document.getElementById("resMonto").innerText = monto.toLocaleString("es-CO", {style: "currency", currency: "COP"});
+      document.getElementById("resTasa").innerText = (tasa * 100).toFixed(2) + " % N.M.V.";
+      document.getElementById("resPlazo").innerText = plazo + " meses";
+      document.getElementById("resCuota").innerText = Math.round(cuota).toLocaleString("es-CO", {style: "currency", currency: "COP"});
+
+      document.getElementById("resultados").style.display = "block";
+    });
+  </script>
+</body>
+</html>
+

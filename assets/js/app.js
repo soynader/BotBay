@@ -8,6 +8,7 @@ const newChatBtn = document.getElementById('newChatBtn');
 const clearHistoryBtn = document.getElementById('clearHistoryBtn');
 const sessionInfo = document.getElementById('sessionInfo');
 const loadingIndicator = document.getElementById('loadingIndicator');
+const simuladorBtn = document.getElementById('simuladorBtn');
 
 // ========================================
 // VARIABLES GLOBALES
@@ -28,6 +29,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
   newChatBtn.addEventListener('click', startNewChat);
   clearHistoryBtn.addEventListener('click', clearChatHistory);
+  if (simuladorBtn) simuladorBtn.addEventListener('click', () => {
+    window.location.href = '/simulador.html';
+  });
   
   // Cargar historial existente
   await loadChatHistory();
@@ -40,8 +44,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 // FUNCIONES DE INTERFAZ
 // ========================================
 function updateSessionInfo() {
-  const info = chatHistory.getSessionInfo();
-  sessionInfo.textContent = `Sesión: ${info.sessionId.slice(-8)} | Mensajes: ${info.messageCount}`;
+  if (!sessionInfo) return;
+  const info = chatHistory?.getSessionInfo?.();
+  const hasValid = info && typeof info.sessionId === 'string' && typeof info.messageCount === 'number' && !Number.isNaN(info.messageCount);
+  if (hasValid) {
+    sessionInfo.textContent = `Sesión: ${info.sessionId.slice(-8)} | Mensajes: ${info.messageCount}`;
+    // Si en el futuro quieres mostrarlo, solo cambia display
+    // sessionInfo.style.display = 'inline';
+  } else {
+    sessionInfo.textContent = '';
+    sessionInfo.style.display = 'none';
+  }
 }
 
 async function loadChatHistory() {
