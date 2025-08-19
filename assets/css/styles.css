@@ -298,6 +298,6 @@ footer {
   /* Asegurar que el scroll funcione correctamente */
   body {
     height: 100vh;
-    height: 150dvh; /* Dynamic viewport height para móviles */
+    height: 120dvh; /* Dynamic viewport height para móviles */
   }
 }
