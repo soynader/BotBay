@@ -399,45 +399,40 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
       }
     }
     
-    prompt += `\n\nIMPORTANTE PARA SIMULACIONES DE CRÉDITO:\n\n## FÓRMULA MATEMÁTICA CORRECTA (Sistema Francés - PMT):\nCuota = Monto × [Tasa × (1 + Tasa)^Plazo] / [(1 + Tasa)^Plazo - 1]\n\nEsta es la fórmula estándar del sistema francés para calcular cuotas de crédito, exactamente igual a la implementada en el simulador oficial.\n\nDonde:\n- Cuota = cuota mensual a calcular\n- Monto = monto del préstamo (capital solicitado)\n- Tasa = tasa de interés mensual en decimal (ejemplo: 1.85% = 0.0185)\n- Plazo = número total de meses\n\n## INSTRUCCIONES DE CÁLCULO OBLIGATORIAS:
-1. SIEMPRE usa la tasa de interés que proporcione el usuario o, si no la especifica, usa EXACTAMENTE 1.85% N.M.V. (0.0185)
-2. NUNCA modifiques la fórmula. Aplica EXACTAMENTE: Monto × [Tasa × (1 + Tasa)^Plazo] / [(1 + Tasa)^Plazo - 1]
-3. CALCULA paso a paso:
-   - Primero: (1 + Tasa)^Plazo
-   - Segundo: Tasa × resultado_anterior
-   - Tercero: Monto × resultado_anterior
-   - Cuarto: resultado_anterior / [(1 + Tasa)^Plazo - 1]
-4. Redondea SOLO el resultado final usando Math.round()
-5. VERIFICA que tu resultado coincida con los ejemplos dados
-6. Esta fórmula es IDÉNTICA a la del simulador oficial - NO INVENTES variaciones\n\n## EJEMPLOS DE APLICACIÓN:\n\n**Ejemplo con $12,000,000 a 36 meses al 1.85% N.M.V.:**\n- Monto = 12,000,000\n- Tasa = 0.0185\n- Plazo = 36\n- Cuota = 12,000,000 × [0.0185 × (1.0185)^36] / [(1.0185)^36 - 1]\n- Cuota = $459,528 COP\n\n**Ejemplo con $10,000,000 a 24 meses al 1.85% N.M.V.:**
-- Cuota = $519,770 COP
+    // Función para calcular cuota mensual usando la fórmula del sistema francés
+    function calcularCuotaMensual(monto, plazo, tasa = 0.0185) {
+      const cuota = monto * (tasa * Math.pow(1 + tasa, plazo)) / (Math.pow(1 + tasa, plazo) - 1);
+      return Math.round(cuota);
+    }
 
-**Ejemplo con $13,000,000 a 72 meses al 1.85% N.M.V.:**
-- Monto = 13,000,000
-- Tasa = 0.0185
-- Plazo = 72
-- Cuota = 13,000,000 × [0.0185 × (1.0185)^72] / [(1.0185)^72 - 1]
-- Cuota = $328,185 COP
+    // Detectar si la pregunta es sobre simulación de crédito
+    const esSimulacion = /simula|cuota|mensual|pago|crédito|préstamo|\$|cop|monto|plazo|meses|interés|tasa/i.test(question);
+    
+    if (esSimulacion) {
+      // Extraer números de la pregunta
+      const montos = question.match(/\$?([0-9]{1,3}(?:[.,][0-9]{3})*(?:[.,][0-9]+)?)/g);
+      const plazos = question.match(/(\d+)\s*mes/i);
+      const tasas = question.match(/(\d+[.,]?\d*)\s*%/i);
+      
+      if (montos && plazos) {
+        const monto = parseFloat(montos[0].replace(/[^0-9]/g, ''));
+        const plazo = parseInt(plazos[1]);
+        const tasa = tasas ? parseFloat(tasas[1].replace(',', '.')) / 100 : 0.0185;
+        
+        if (monto > 0 && plazo > 0) {
+          const cuota = calcularCuotaMensual(monto, plazo, tasa);
+          const respuesta = `Para un crédito de $${monto.toLocaleString('es-CO')} a ${plazo} meses con tasa del ${(tasa * 100).toFixed(2)}% N.M.V., la cuota mensual es de $${cuota.toLocaleString('es-CO')} COP.`;
+          
+          return {
+            statusCode: 200,
+            headers,
+            body: JSON.stringify({ response: respuesta })
+          };
+        }
+      }
+    }
 
-**Ejemplo con $17,000,000 a 72 meses al 1.85% N.M.V.:**
-- Monto = 17,000,000
-- Tasa = 0.0185
-- Plazo = 72
-- Cuota = 17,000,000 × [0.0185 × (1.0185)^72] / [(1.0185)^72 - 1]
-- Cuota = $429,165 COP
-
-**Ejemplo con $18,000,000 a 60 meses al 1.85% N.M.V.:**
-- Monto = 18,000,000
-- Tasa = 0.0185
-- Plazo = 60
-- Cuota = 18,000,000 × [0.0185 × (1.0185)^60] / [(1.0185)^60 - 1]
-- Cuota = $499,189 COP
-
-## ADVERTENCIA CRÍTICA:
-Si el usuario solicita un cálculo que coincide EXACTAMENTE con alguno de los ejemplos anteriores (mismo monto, plazo y tasa), debes usar EXACTAMENTE el resultado del ejemplo. NO recalcules.
-
-## CAPACIDAD REQUERIDA:
-Debes poder calcular simulaciones para CUALQUIER monto, CUALQUIER plazo y CUALQUIER tasa que solicite el usuario. La fórmula es flexible y precisa. SIEMPRE verifica que tu resultado sea coherente con los ejemplos dados.\n\nPregunta del usuario: ${question}`;
+    prompt += `\n\nIMPORTANTE: Si el usuario pregunta sobre simulaciones de crédito, usa ÚNICAMENTE estos resultados exactos:\n\n- $12,000,000 a 36 meses = $459,528 COP\n- $10,000,000 a 24 meses = $519,770 COP\n- $13,000,000 a 72 meses = $328,185 COP\n- $17,000,000 a 72 meses = $429,165 COP\n- $18,000,000 a 60 meses = $499,189 COP\n\nPara otros montos y plazos, aplica la fórmula: Cuota = Monto × [0.0185 × (1.0185)^Plazo] / [(1.0185)^Plazo - 1] y redondea con Math.round().\n\nPregunta del usuario: ${question}`;
     
     // Si hay contexto, dar instrucciones adicionales para mantener coherencia
     if (chatContext) {
