@@ -1,7 +1,7 @@
 {
   "name": "bayport-ia",
   "version": "1.0.0",
-  "description": "Asistente virtual inteligente para asesoría financiera de Bayport Colombia",
+  "description": "Asistente virtual inteligente para asesoría financiera de Skala Fintech",
   "main": "index.html",
   "scripts": {
     "dev": "netlify dev",
@@ -17,6 +17,6 @@
     "netlify",
     "groq"
   ],
-  "author": "Bayport Colombia",
+  "author": "Skala Fintech",
   "license": "MIT"
 }

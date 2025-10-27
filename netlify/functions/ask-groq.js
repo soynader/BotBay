@@ -75,7 +75,7 @@ exports.handler = async (event, context) => {
     // Conocimiento base para asesores (extraído de asesores.json)
     const knowledgeData = {
       "empresa": {
-        "nombre": "Bayport Colombia",
+        "nombre": "Skala Fintech",
         "descripcion": "Empresa financiera especializada en créditos de libranza para empleados públicos, fuerzas militares, policía y pensionados",
         "experiencia": "Más de 10 años en el mercado colombiano",
         "grupo": "Bayport Management Ltd",
@@ -231,7 +231,7 @@ exports.handler = async (event, context) => {
     
     // Convertir el JSON a texto estructurado para la IA
     const KNOWLEDGE = `
-# Asistente de IA para Asesores Bayport Colombia
+# Asistente de IA para Asesores Skala Fintech
 
 ## INFORMACIÓN CORPORATIVA
 - Empresa: ${knowledgeData.empresa.nombre}
@@ -374,7 +374,7 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
     }
     
     // Crear el prompt para la IA incluyendo contexto del historial si existe
-    let prompt = `Eres un asesor experto de Bayport Colombia. Responde de manera conversacional y personalizada usando el siguiente contexto:\n${KNOWLEDGE}`;
+    let prompt = `Eres un asesor experto de Skala Fintech. Responde de manera conversacional y personalizada usando el siguiente contexto:\n${KNOWLEDGE}`;
     
     // Agregar contexto del historial de chat si existe
     if (chatContext) {
@@ -461,7 +461,7 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
         'Authorization': `Bearer ${process.env.GROQ_API_KEY}`
       },
       body: JSON.stringify({
-        model: 'llama3-70b-8192',
+        model: 'llama-3.1-8b-instant',
         messages: [{ role: 'user', content: prompt }],
         max_tokens: 150,
         temperature: 0.3

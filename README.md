@@ -1,10 +1,10 @@
 # 🚀 Bayport IA - Chat Assistant
 
-**Asistente virtual inteligente para asesoría financiera de Bayport Colombia**
+**Asistente virtual inteligente para asesoría financiera de Skala Fintech**
 
 ## 📋 Descripción
 
-Aplicación web de chat que utiliza IA (Groq API) para brindar asesoría personalizada sobre productos financieros de Bayport Colombia. Optimizada para dispositivos móviles con diseño responsivo y burbujas de chat anchas.
+Aplicación web de chat que utiliza IA (Groq API) para brindar asesoría personalizada sobre productos financieros de Skala Fintech. Optimizada para dispositivos móviles con diseño responsivo y burbujas de chat anchas.
 
 ## 🛠️ Tecnologías
 
