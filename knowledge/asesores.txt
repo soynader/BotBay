@@ -100,8 +100,8 @@ Margen de seguridad únicamente para Colpensiones de $5.000 prestando más diner
 
 Monto total del crédito $140 000.000 de 18 a 90 años
 Plazo mínimo 24 meses máximo 180 meses (Sujeto a pagaduría)
-Tasa de interés: mensual fija 1,78%
-Mensual de interés Efectivo Anual 23,58%
+Tasa de interés: mensual fija	1,78%
+Tasa de interés: Anual fija	23,58%
 
 PROCESOS
 --------
