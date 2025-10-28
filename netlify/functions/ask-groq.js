@@ -9,25 +9,7 @@ const CORS_HEADERS = {
   'Content-Type': 'application/json'
 };
 
-// Prompt de respaldo en caso de que Google Sheets no esté disponible
-const FALLBACK_PROMPT = `
-# SKALA FINTECH - ASESOR VIRTUAL
-
-## INFORMACIÓN BÁSICA:
-- Empresa: SKALA FINTECH
-- Especialidad: Créditos de libranza
-- Público objetivo: Empleados públicos, fuerzas militares, policía y pensionados
-
-## RESTRICCIONES CRÍTICAS:
-- ❌ NO se presta a SOLDADOS (solo oficiales y suboficiales)
-- ❌ Verificar empresa en convenios autorizados
-- ✅ Edad: 18-82 años
-- ✅ Monto máximo: $140,000,000
-- ✅ Plazo máximo: 180 meses
-
-## INSTRUCCIONES:
-Responder de forma profesional y precisa. Si no tienes información específica, solicitar contactar directamente con Skala.
-`;
+// La aplicación funciona ÚNICAMENTE con Google Sheets - sin fallback
 
 exports.handler = async (event, context) => {
   // Manejar preflight CORS
@@ -91,28 +73,36 @@ exports.handler = async (event, context) => {
       }
     }
 
-    // Obtener el prompt de entrenamiento desde Google Sheets
+    // Obtener el prompt de entrenamiento desde Google Sheets (OBLIGATORIO)
     let trainingPrompt = '';
     try {
       const sheetId = process.env.SHEET_ID;
       
       if (!sheetId) {
-        throw new Error('SHEET_ID no está configurado en las variables de entorno');
+        throw new Error('SHEET_ID no está configurado en las variables de entorno. La aplicación requiere Google Sheets para funcionar.');
       }
 
       console.log('📊 Obteniendo prompt de entrenamiento desde Google Sheets...');
-      trainingPrompt = await googleSheetsService.getPromptWithFallback(sheetId, FALLBACK_PROMPT);
+      trainingPrompt = await googleSheetsService.getTrainingPrompt(sheetId);
       
-      if (trainingPrompt === FALLBACK_PROMPT) {
-        console.warn('⚠️ Usando prompt de respaldo - verificar configuración de Google Sheets');
-      } else {
-        console.log('✅ Prompt de entrenamiento obtenido exitosamente desde Google Sheets');
+      if (!trainingPrompt || trainingPrompt.trim().length === 0) {
+        throw new Error('El prompt de entrenamiento está vacío en Google Sheets (SkalaIA!A2). La aplicación requiere datos válidos para funcionar.');
       }
       
+      console.log('✅ Prompt de entrenamiento obtenido exitosamente desde Google Sheets');
+      
     } catch (error) {
-      console.error('❌ Error obteniendo datos de Google Sheets:', error.message);
-      trainingPrompt = FALLBACK_PROMPT;
-      console.log('🔄 Usando prompt de respaldo');
+      console.error('❌ Error crítico - Google Sheets no disponible:', error.message);
+      
+      return {
+        statusCode: 503,
+        headers: CORS_HEADERS,
+        body: JSON.stringify({ 
+          error: 'Servicio no disponible',
+          message: 'La aplicación requiere conexión con Google Sheets para funcionar. Por favor, contacta al administrador.',
+          details: error.message
+        })
+      };
     }
 
     // Validaciones críticas automáticas
