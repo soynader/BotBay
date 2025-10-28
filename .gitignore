@@ -36,3 +36,26 @@ Thumbs.db
 
 # Netlify
 .netlify/
+
+# Archivos temporales y de desarrollo
+*.tmp
+*.temp
+~$*
+
+# Archivos de Excel temporales
+*.xlsm
+*.xlsx~
+~*.xlsx
+~*.xlsm
+
+# Archivos de respaldo
+*.bak
+*.backup
+
+# Archivos de configuración local
+config.local.js
+settings.local.json
+
+# Cache
+.cache/
+*.cache

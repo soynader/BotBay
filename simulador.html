@@ -77,74 +77,157 @@
   </header>
   <div class="simulador">
     
-    <form id="formSimulador">
-      <label for="monto">Monto solicitado (COP)</label>
-      <input type="text" id="monto" placeholder="Ej: 12.000.000" required>
+    <form id="simuladorForm">
+      <label for="monto">Monto solicitado ($)</label>
+      <input type="text" id="monto" placeholder="Ej: 50000000" required>
 
       <label for="plazo">Plazo (meses)</label>
-      <select id="plazo">
-        <option value="12">12</option>
-        <option value="24">24</option>
-        <option value="36">36</option>
-        <option value="48">48</option>
-        <option value="60">60</option>
-        <option value="72">72</option>
-        <option value="84">84</option>
-        <option value="96">96</option>
-        <option value="108">108</option>
-        <option value="120">120</option>
+      <select id="plazo" required>
+        <option value="">Seleccione el plazo</option>
+        <option value="24">24 meses (2 años)</option>
+        <option value="36">36 meses (3 años)</option>
+        <option value="48">48 meses (4 años)</option>
+        <option value="60">60 meses (5 años)</option>
+        <option value="72">72 meses (6 años)</option>
+        <option value="84">84 meses (7 años)</option>
+        <option value="96">96 meses (8 años)</option>
+        <option value="108">108 meses (9 años)</option>
+        <option value="120">120 meses (10 años)</option>
+        <option value="132">132 meses (11 años)</option>
+        <option value="144">144 meses (12 años)</option>
+        <option value="156">156 meses (13 años)</option>
+        <option value="168">168 meses (14 años)</option>
+        <option value="180">180 meses (15 años)</option>
       </select>
-
-      <label for="tasa">Interés mensual (N.M.V.)</label>
-      <input type="number" step="0.0001" id="tasa" value="0.0185" required>
 
       <button type="submit" class="btn">Simular</button>
     </form>
 
-    <div class="resultados" id="resultados" style="display:none;">
-      <div class="row"><span class="label">Monto solicitado:</span> <span id="resMonto"></span></div>
-      <div class="row"><span class="label">Tasa de interés:</span> <span id="resTasa"></span></div>
-      <div class="row"><span class="label">Plazo:</span> <span id="resPlazo"></span></div>
-      <div class="row"><span class="label">Cuota mensual:</span> <span id="resCuota"></span></div>
+    <div id="resultado" style="display: none;">
+      <h3>Resultado de la Simulación</h3>
+      <div class="resultado-item">
+        <span>Cuota mensual:</span>
+        <span id="resultadoCuota"></span>
+      </div>
+      <div class="resultado-item">
+        <span>Total a pagar:</span>
+        <span id="resultadoTotal"></span>
+      </div>
     </div>
+
+    <div id="alertas"></div>
   </div>
 
   <script>
-    // Formatear el campo monto con separadores de miles
-    const montoInput = document.getElementById("monto");
-    montoInput.addEventListener("input", function(e) {
-      let value = this.value.replace(/\./g, "").replace(/[^0-9]/g, ""); // eliminar puntos y no números
-      if (value) {
-        this.value = parseInt(value, 10).toLocaleString("es-CO"); // formato con puntos
-      } else {
-        this.value = "";
+    // Parámetros del sistema financiero basados en datos reales
+    const TASA_INTERES_MENSUAL = 0.01780; // 1.780% mensual fija
+    const SEGURO_VIDA = 0.00450; // 0.450% seguro de vida
+    const VALOR_AVAL = 0.116; // 11.6% Valor Aval
+    const ESTUDIO_CREDITO = 0.024; // 2.4% Estudio de Crédito
+    const COMISION_BANCARIA = 5000; // $5,000 fijo
+    const CUATRO_POR_MIL = 0.004; // 0.4% (4 por mil)
+
+    // Función para calcular cuota mensual (Sistema Francés)
+    function calcularCuotaFrances(capital, tasaMensual, plazoMeses) {
+      if (tasaMensual === 0) return capital / plazoMeses;
+      
+      const factor = Math.pow(1 + tasaMensual, plazoMeses);
+      return (capital * tasaMensual * factor) / (factor - 1);
+    }
+
+    // Formatear números con separadores de miles
+    function formatearNumero(numero) {
+      return new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP',
+        minimumFractionDigits: 0
+      }).format(numero);
+    }
+
+    // Formatear input de monto
+    document.getElementById('monto').addEventListener('input', function(e) {
+      let valor = e.target.value.replace(/[^\d]/g, '');
+      if (valor) {
+        e.target.value = new Intl.NumberFormat('es-CO').format(valor);
       }
     });
 
-    document.getElementById("formSimulador").addEventListener("submit", function(e) {
-      e.preventDefault();
-
-      // Convertir texto con puntos a número
-      const monto = parseFloat(montoInput.value.replace(/\./g, ""));
-      const plazo = parseInt(document.getElementById("plazo").value);
-      const tasa = parseFloat(document.getElementById("tasa").value); // Ej: 0.0185 = 1.85%
-
-      if (isNaN(monto) || isNaN(plazo) || isNaN(tasa) || monto <= 0 || plazo <= 0) {
-        alert("Por favor ingresa valores válidos.");
+    function calcularCuota() {
+      const montoSolicitado = parseInt(document.getElementById('monto').value.replace(/[^\d]/g, ''));
+      const plazo = parseInt(document.getElementById('plazo').value);
+      
+      // Validaciones básicas
+      if (!montoSolicitado || !plazo) {
+        mostrarAlerta('Por favor complete todos los campos');
         return;
       }
-
-      // Fórmula PMT (sistema francés)
-      const cuota = monto * (tasa * Math.pow(1 + tasa, plazo)) / (Math.pow(1 + tasa, plazo) - 1);
-
+      
+      if (plazo < 24 || plazo > 180) {
+        mostrarAlerta('El plazo debe estar entre 24 y 180 meses');
+        return;
+      }
+      
+      // Tabla de referencia para $20,000,000
+      const tablaReferencia = {
+        24: 989889,
+        36: 889888,
+        48: 833335,
+        60: 742140,
+        72: 683514,
+        84: 643440,
+        96: 614854,
+        108: 593857,
+        120: 578095,
+        132: 566061,
+        144: 556765,
+        156: 549513,
+        168: 543813,
+        180: 539306
+      };
+      
+      const montoReferencia = 20000000;
+      
+      // Buscar la cuota de referencia para el plazo
+      let cuotaReferencia = tablaReferencia[plazo];
+      
+      if (!cuotaReferencia) {
+        mostrarAlerta('Plazo no disponible. Seleccione un plazo de la lista.');
+        return;
+      }
+      
+      // Cálculo usando regla de tres
+      // Formula: (montoSolicitado * cuotaReferencia) / montoReferencia
+      const cuotaAproximada = (montoSolicitado * cuotaReferencia) / montoReferencia;
+      
+      // Total a pagar
+      const totalAPagar = cuotaAproximada * plazo;
+      
       // Mostrar resultados
-      document.getElementById("resMonto").innerText = monto.toLocaleString("es-CO", {style: "currency", currency: "COP"});
-      document.getElementById("resTasa").innerText = (tasa * 100).toFixed(2) + " % N.M.V.";
-      document.getElementById("resPlazo").innerText = plazo + " meses";
-      document.getElementById("resCuota").innerText = Math.round(cuota).toLocaleString("es-CO", {style: "currency", currency: "COP"});
-
-      document.getElementById("resultados").style.display = "block";
+      document.getElementById('resultadoCuota').textContent = '$' + Math.round(cuotaAproximada).toLocaleString();
+      document.getElementById('resultadoTotal').textContent = '$' + Math.round(totalAPagar).toLocaleString();
+      
+      document.getElementById('resultado').style.display = 'block';
+      
+      // Limpiar alertas
+      document.getElementById('alertas').style.display = 'none';
+    }
+    
+    // Manejar envío del formulario
+    document.getElementById('simuladorForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      calcularCuota();
     });
+
+    function mostrarAlerta(mensaje) {
+      const alertas = document.getElementById('alertas');
+      alertas.innerHTML = `<strong>⚠️ Error:</strong> ${mensaje}`;
+      alertas.style.display = 'block';
+      alertas.style.background = '#ff4444';
+      alertas.style.color = 'white';
+      alertas.style.padding = '10px';
+      alertas.style.borderRadius = '8px';
+      alertas.style.marginTop = '15px';
+    }
   </script>
 </body>
 </html>

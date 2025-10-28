@@ -20,12 +20,22 @@
     Access-Control-Allow-Headers = "Content-Type"
     Access-Control-Allow-Methods = "GET, POST, OPTIONS"
 
-# Redirecciones para SPA (opcional)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Configuración de cache para archivos estáticos
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
 
-# Variables de entorno (ejemplo - configurar en el panel de Netlify)
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# Variables de entorno (configurar en el panel de Netlify)
 # [build.environment]
 #   GROQ_API_KEY = "tu_clave_aqui"

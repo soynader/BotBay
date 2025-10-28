@@ -1,5 +1,5 @@
 {
-  "name": "bayport-ia",
+  "name": "Skala-ia",
   "version": "1.0.0",
   "description": "Asistente virtual inteligente para asesoría financiera de Skala Fintech",
   "main": "index.html",
@@ -11,7 +11,7 @@
     "node-fetch": "^2.6.7"
   },
   "keywords": [
-    "bayport",
+    "Skala",
     "ia",
     "chat",
     "netlify",

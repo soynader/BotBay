@@ -1,73 +1,127 @@
-# 🚀 Bayport IA - Chat Assistant
+# 🚀 Skala IA - Asistente Virtual Financiero
 
-**Asistente virtual inteligente para asesoría financiera de Skala Fintech**
+**Plataforma completa de asesoría financiera con IA para Skala Fintech**
 
 ## 📋 Descripción
 
-Aplicación web de chat que utiliza IA (Groq API) para brindar asesoría personalizada sobre productos financieros de Skala Fintech. Optimizada para dispositivos móviles con diseño responsivo y burbujas de chat anchas.
+Aplicación web completa que incluye:
+- **Chat inteligente** con IA (Groq API) para asesoría financiera personalizada
+- **Simulador de créditos** con cálculos precisos basados en tabla de referencia
+- **Interfaz responsiva** optimizada para móviles y escritorio
+- **Funciones serverless** para procesamiento backend
 
 ## 🛠️ Tecnologías
 
 - **Frontend**: HTML5, CSS3, JavaScript (Vanilla)
 - **Backend**: Netlify Functions (Node.js)
-- **IA**: Groq API (Llama 3 70B)
+- **IA**: Groq API (Llama 3.1 70B)
 - **Hosting**: Netlify
+- **Datos**: Archivo de conocimiento local (asesores.txt)
 
 ## 📁 Estructura del Proyecto
 
 ```
-├── index_burbujas_anchas.html    # Aplicación principal
+├── index.html                    # Página principal del chat
+├── simulador.html               # Simulador de créditos
+├── assets/
+│   ├── css/
+│   │   └── styles.css          # Estilos principales
+│   └── js/
+│       ├── app.js              # Lógica del chat
+│       └── chat-history.js     # Gestión de historial
 ├── netlify/
 │   └── functions/
-│       └── ask-groq.js           # Función serverless para IA
-├── netlify.toml                  # Configuración de Netlify
-└── README.md                     # Este archivo
+│       ├── ask-groq.js         # Función IA con conocimiento
+│       └── save-chat-history.js # Gestión de historial
+├── knowledge/
+│   └── asesores.txt            # Base de conocimiento
+├── netlify.toml                # Configuración de Netlify
+├── package.json                # Dependencias
+└── README.md                   # Este archivo
 ```
 
-## 🚀 Despliegue en Netlify
+## 🚀 Guía de Despliegue
 
-### Opción 1: Drag & Drop (Más Fácil)
+### 📋 Pre-requisitos
 
-1. **Preparar archivos**:
-   - Asegúrate de tener todos los archivos del proyecto
-   - Renombra `index_burbujas_anchas.html` a `index.html`
+1. **Cuenta de GitHub** (gratuita)
+2. **Cuenta de Netlify** (gratuita)
+3. **API Key de Groq** (gratuita)
 
-2. **Subir a Netlify**:
+### 🔧 Paso 1: Preparar el Proyecto
+
+El proyecto ya está listo para producción con:
+- ✅ Configuración optimizada de `netlify.toml`
+- ✅ `.gitignore` actualizado
+- ✅ Funciones serverless optimizadas
+- ✅ Cache configurado para archivos estáticos
+
+### 📤 Paso 2: Subir a GitHub
+
+```bash
+# 1. Inicializar repositorio Git
+git init
+
+# 2. Agregar todos los archivos
+git add .
+
+# 3. Hacer commit inicial
+git commit -m "🚀 Skala IA - Asistente Virtual Financiero"
+
+# 4. Crear rama principal
+git branch -M main
+
+# 5. Conectar con repositorio remoto (crear en GitHub primero)
+git remote add origin https://github.com/TU-USUARIO/skala-ia.git
+
+# 6. Subir código
+git push -u origin main
+```
+
+### 🌐 Paso 3: Desplegar en Netlify
+
+#### Opción A: Integración con GitHub (Recomendado)
+
+1. **Conectar repositorio**:
    - Ve a [netlify.com](https://netlify.com)
-   - Arrastra toda la carpeta del proyecto al área de despliegue
-   - Netlify detectará automáticamente la configuración
+   - Clic en **"New site from Git"**
+   - Selecciona **GitHub** y autoriza
+   - Elige tu repositorio `skala-ia`
 
-3. **Configurar variable de entorno**:
-   - En el panel de Netlify, ve a **Site settings > Environment variables**
-   - Crea una nueva variable:
-     - **Key**: `GROQ_API_KEY`
-     - **Value**: `tu_clave_de_groq_aqui`
-   - Guarda los cambios
+2. **Configuración automática**:
+   - Netlify detectará `netlify.toml` automáticamente
+   - **Build command**: `echo 'No build required'`
+   - **Publish directory**: `.` (raíz)
+   - **Functions directory**: `netlify/functions`
 
-4. **Redesplegar**:
-   - Ve a **Deploys** y haz clic en **Trigger deploy**
-   - Selecciona **Deploy site**
+3. **Deploy inicial**:
+   - Clic en **"Deploy site"**
+   - Netlify asignará una URL temporal
 
-### Opción 2: Git Integration (Recomendado)
+#### Opción B: Deploy Manual
 
-1. **Subir a GitHub**:
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/tu-usuario/bayport-ia.git
-   git push -u origin main
-   ```
+1. **Comprimir proyecto**:
+   - Crear ZIP con todos los archivos
+   - Excluir `.git/`, `node_modules/`, `.netlify/`
 
-2. **Conectar con Netlify**:
-   - En Netlify, clic en **New site from Git**
-   - Conecta tu repositorio de GitHub
-   - Configuración automática detectada por `netlify.toml`
+2. **Subir manualmente**:
+   - Arrastra el ZIP a netlify.com
+   - Configuración detectada automáticamente
 
-3. **Configurar variables de entorno**:
-   - **Site settings > Environment variables**
-   - Agregar: `GROQ_API_KEY = tu_clave_aqui`
+### 🔑 Paso 4: Configurar Variables de Entorno
+
+1. **En el panel de Netlify**:
+   - Ve a **Site settings > Environment variables**
+   - Clic en **"Add variable"**
+
+2. **Agregar API Key**:
+   - **Key**: `GROQ_API_KEY`
+   - **Value**: `tu_clave_de_groq_aqui`
+   - **Scopes**: Todas las opciones marcadas
+
+3. **Redesplegar**:
+   - Ve a **Deploys > Trigger deploy**
+   - Selecciona **"Deploy site"**
 
 ## 🔑 Obtener API Key de Groq
 
@@ -94,11 +148,48 @@ echo "GROQ_API_KEY=tu_clave_aqui" > .env
 netlify dev
 ```
 
-## 🎯 Características
+### ✅ Paso 5: Verificar Despliegue
 
-### ✅ Funcionalidades
-- Chat en tiempo real con IA
-- Respuestas contextuales sobre productos Bayport
+1. **Probar la aplicación**:
+   - Abre la URL asignada por Netlify
+   - Verifica que el chat funcione correctamente
+   - Prueba el simulador de créditos
+
+2. **Configurar dominio personalizado** (opcional):
+   - En **Site settings > Domain management**
+   - Agregar dominio personalizado
+   - Configurar DNS según instrucciones
+
+## 🎯 Características de la Aplicación
+
+### 💬 Chat Inteligente
+- **IA avanzada** con Groq (Llama 3.1 70B)
+- **Conocimiento especializado** en productos Skala
+- **Respuestas contextuales** basadas en base de datos local
+- **Historial de conversaciones** persistente
+- **Interfaz responsiva** optimizada para móviles
+
+### 🧮 Simulador de Créditos
+- **Cálculos precisos** basados en tabla de referencia oficial
+- **Regla de tres** para montos personalizados
+- **Validaciones automáticas** de términos y montos
+- **Resultados formateados** con separadores de miles
+- **Interfaz intuitiva** y fácil de usar
+
+### 🔧 Funciones Técnicas
+- **Serverless functions** optimizadas para Netlify
+- **CORS configurado** para acceso desde cualquier dominio
+- **Cache inteligente** para archivos estáticos
+- **Manejo robusto de errores** y fallbacks
+- **Logging detallado** para debugging
+
+### 📱 Experiencia de Usuario
+- **Diseño responsivo** que se adapta a cualquier dispositivo
+- **Carga rápida** con optimizaciones de rendimiento
+- **Navegación intuitiva** entre chat y simulador
+- **Feedback visual** en tiempo real
+- **Accesibilidad mejorada** para todos los usuarios
+- Respuestas contextuales sobre productos Skala
 - Diseño responsivo (móvil y desktop)
 - Burbujas de chat anchas y optimizadas
 - API key protegida con Netlify Functions
@@ -120,7 +211,7 @@ netlify dev
 ## 📱 Uso
 
 1. **Acceder**: Abre la URL de tu sitio Netlify
-2. **Chatear**: Escribe preguntas sobre productos Bayport
+2. **Chatear**: Escribe preguntas sobre productos Skala
 3. **Respuestas**: Recibe asesoría personalizada en segundos
 
 ### Ejemplos de preguntas:
@@ -168,4 +259,4 @@ Para actualizar el contenido o funcionalidad:
 
 ---
 
-**¡Tu asistente Bayport IA está listo para ayudar a tus clientes! 🎉**
+**¡Tu asistente Skala IA está listo para ayudar a tus clientes! 🎉**

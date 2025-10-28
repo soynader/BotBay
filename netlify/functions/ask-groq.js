@@ -1,4 +1,6 @@
 const fetch = require('node-fetch');
+const fs = require('fs');
+const path = require('path');
 
 // Headers CORS reutilizables
 const CORS_HEADERS = {
@@ -72,13 +74,54 @@ exports.handler = async (event, context) => {
       }
     }
 
-    // Conocimiento base para asesores (extraído de asesores.json)
-    const knowledgeData = {
+    // Leer el archivo de conocimiento asesores.txt
+    let knowledgeText = '';
+    try {
+      // Intentar múltiples rutas posibles para el archivo
+      const possiblePaths = [
+        path.join(__dirname, '../../knowledge/asesores.txt'),
+        path.join(process.cwd(), 'knowledge/asesores.txt'),
+        path.join(__dirname, '../../../knowledge/asesores.txt'),
+        './knowledge/asesores.txt'
+      ];
+      
+      let knowledgePath = null;
+      for (const testPath of possiblePaths) {
+        if (fs.existsSync(testPath)) {
+          knowledgePath = testPath;
+          break;
+        }
+      }
+      
+      if (knowledgePath) {
+        knowledgeText = fs.readFileSync(knowledgePath, 'utf8');
+        console.log('Archivo asesores.txt leído correctamente desde:', knowledgePath);
+      } else {
+        throw new Error('Archivo asesores.txt no encontrado en ninguna ruta');
+      }
+    } catch (error) {
+      console.log('Error leyendo asesores.txt, usando datos embebidos como respaldo:', error.message);
+      knowledgeText = `
+INFORMACIÓN PARA ENTRENAMIENTO DE IA SOBRE SKALA FINTECH
+==========================================================
+
+EMPRESA SKALA
+-------------
+Nombre: SKALA
+Tipo: Financiera especializada en créditos de libranza
+
+IMPORTANTE: NO se presta a soldados.
+Solo se presta a oficiales y suboficiales activos, EXCEPTO SOLDADOS.
+      `;
+    }
+
+    // Placeholder para compatibilidad - ya no se usa knowledgeData
+    /*
       "empresa": {
         "nombre": "Skala Fintech",
         "descripcion": "Empresa financiera especializada en créditos de libranza para empleados públicos, fuerzas militares, policía y pensionados",
         "experiencia": "Más de 10 años en el mercado colombiano",
-        "grupo": "Bayport Management Ltd",
+        "grupo": "Skala Management Ltd",
         "experiencia_internacional": "Más de 19 años en préstamos por libranza",
         "presencia_internacional": ["Sudáfrica", "Zambia", "Uganda", "México", "Mozambique", "Tanzania", "Colombia", "Ghana", "Botswana"],
         "cifras": {
@@ -97,8 +140,8 @@ exports.handler = async (event, context) => {
         }
       },
       "glosario": {
-        "libranza": "Autorización que el cliente da a su entidad pagadora para que realice el descuento de su nómina o pensión y consigne directamente a Bayport la cuota acordada",
-        "pagaduria": "Entidad con la que Bayport tiene un convenio para descuentos por libranza de empleados o pensionados",
+        "libranza": "Autorización que el cliente da a su entidad pagadora para que realice el descuento de su nómina o pensión y consigne directamente a Skala la cuota acordada",
+        "pagaduria": "Entidad con la que Skala tiene un convenio para descuentos por libranza de empleados o pensionados",
         "desprendible_pago": "Soporte de pago que las entidades expiden a sus empleados o pensionados donde se reflejan sus ingresos y descuentos mensuales",
         "embargo_pensional": "Orden judicial emitida para el cumplimiento de una obligación no pagada, que opera sobre el salario o pensión",
         "paz_salvo": "Documento que certifica la cancelación total de una obligación financiera",
@@ -116,7 +159,7 @@ exports.handler = async (event, context) => {
         },
         {
           "tipo": "Refinanciación",
-          "descripcion": "Para clientes con crédito vigente en Bayport, unificando la deuda en una sola operación"
+          "descripcion": "Para clientes con crédito vigente en Skala, unificando la deuda en una sola operación"
         },
         {
           "tipo": "Crédito paralelo",
@@ -131,7 +174,7 @@ exports.handler = async (event, context) => {
           "Herramientas tecnológicas",
           "Atención desde casa",
           "Concursos y reconocimientos",
-          "Plan de Lealtad (Bayport Plus)",
+          "Plan de Lealtad (Skala Plus)",
           "Acompañamiento humano",
           "Capacitación continua",
           "Independencia laboral"
@@ -212,7 +255,7 @@ exports.handler = async (event, context) => {
       "argumentos_venta": {
         "ventajas_competitivas": ["Agilidad en procesos y atención personalizada/asistida", "Crédito 100% digital sin obligatoriedad de presencia física", "Mínimos documentos para formalización", "Herramientas tecnológicas disponibles (Portal de clientes)", "Validación de identidad y firma digital con proveedores expertos", "Transparencia en todos los procesos", "Comunicación constante durante el trámite"],
         "portal_clientes": {
-          "acceso": ["https://www.bayportcolombia.com", "https://www.bayportcolombia.com/portalclientes/"],
+          "acceso": ["https://www.Skalacolombia.com", "https://www.Skalacolombia.com/portalclientes/"],
           "tramites": ["Certificado de saldo", "Tabla de amortización", "Condiciones del crédito", "Aclaración de pago", "Devolución de dinero", "Paz y salvo", "Certificación al día", "Certificación declaración de renta", "Condiciones del seguro", "Consulta documentos de crédito", "Detalle de estado de cuenta", "Pago cuota"]
         },
         "canales_servicio": {
@@ -227,133 +270,156 @@ exports.handler = async (event, context) => {
         "deberes_asesor": ["Siempre entregar información completa y clara según lineamientos de la compañía", "Aclarar condiciones del crédito (monto, plazo, cuota, descuentos) antes de la aceptación y desembolso", "Tomar medidas para evitar fraudes, revisando documentos del cliente", "Diligenciamiento completo de formularios", "Siempre presentar beneficios de la póliza de seguro de vida voluntario", "Tratar clientes y colegas con honestidad, integridad y profesionalismo", "Cuidar presentación personal y ser puntual en citas", "Asistir puntualmente a entrenamientos y reuniones programadas", "Contar con formato de solicitud firmado por el cliente para perfilamiento", "Hacer firmar documentos nuevamente si hay cambios en condiciones"],
         "prohibiciones_asesor": ["Solicitar dinero al cliente por cualquier concepto", "Ofrecer condiciones diferentes a las establecidas por la compañía", "Realizar promesas que no se puedan cumplir", "Falsificar o alterar documentos", "Compartir información confidencial de clientes", "Usar información de clientes para beneficio personal", "Realizar actividades que generen conflicto de interés", "Discriminar por raza, género, religión o condición social", "Usar lenguaje inapropiado o tener comportamientos inadecuados", "Realizar actividades comerciales durante horarios de trabajo"]
       }
-     };
+      };
+    */
     
-    // Convertir el JSON a texto estructurado para la IA
-    const KNOWLEDGE = `
-# Asistente de IA para Asesores Skala Fintech
+    // Usar el texto del archivo asesores.txt como conocimiento principal
+    const KNOWLEDGE = knowledgeText;
 
-## INFORMACIÓN CORPORATIVA
-- Empresa: ${knowledgeData.empresa.nombre}
-- Descripción: ${knowledgeData.empresa.descripcion}
-- Experiencia: ${knowledgeData.empresa.experiencia}
-- Grupo: ${knowledgeData.empresa.grupo}
-- Experiencia internacional: ${knowledgeData.empresa.experiencia_internacional}
-- Presencia internacional: ${knowledgeData.empresa.presencia_internacional.join(', ')}
+    // Lista de empresas autorizadas extraída del archivo de conocimiento
+    const EMPRESAS_AUTORIZADAS = [
+      'andina vida seguros', 'bbva seguros', 'seguros bolívar', 'mindefensa pensionado',
+      'cremil', 'asulado', 'fiduprevisora', 'sura', 'coolfondos', 'protección',
+      'positiva', 'seguros alfa', 'colpensiones', 'mapfre', 'ffopep', 'casur',
+      'porvenir', 'cagen', 'ejercito nacional'
+    ];
 
-### Cifras Relevantes
-- Clientes mundial: ${knowledgeData.empresa.cifras.clientes_mundial}
-- Sucursales: ${knowledgeData.empresa.cifras.sucursales}
-- Colaboradores: ${knowledgeData.empresa.cifras.colaboradores}
-- Sucursales Colombia: ${knowledgeData.empresa.cifras.sucursales_colombia}
-- Clientes Colombia: ${knowledgeData.empresa.cifras.clientes_colombia}
-- Cartera: ${knowledgeData.empresa.cifras.cartera}
-- Participación mercado: ${knowledgeData.empresa.cifras.participacion_mercado}
+    // Función para validar si una empresa está autorizada
+    function validarEmpresaAutorizada(pregunta) {
+      const preguntaLower = pregunta.toLowerCase();
+      
+      // Buscar menciones de empresas en la pregunta
+      const empresasMencionadas = [];
+      
+      // Verificar empresas específicas mencionadas en la pregunta
+      if (preguntaLower.includes('ecopetrol')) {
+        empresasMencionadas.push('ecopetrol');
+      }
+      
+      // Verificar otras empresas comunes no autorizadas
+      const empresasNoAutorizadas = [
+        'ecopetrol', 'petrobras', 'chevron', 'shell', 'bp', 'total', 'repsol',
+        'avianca', 'latam', 'copa airlines', 'viva air', 'wingo',
+        'bancolombia', 'banco de bogotá', 'banco popular', 'davivienda',
+        'banco av villas', 'banco caja social', 'banco falabella',
+        'coca cola', 'pepsi', 'bavaria', 'postobon', 'alpina',
+        'grupo éxito', 'carulla', 'olimpica', 'metro', 'makro',
+        'telefónica', 'claro', 'movistar', 'tigo', 'une',
+        'cemex', 'argos', 'corona', 'eternit', 'ladrillera santafé'
+      ];
+      
+      for (const empresa of empresasNoAutorizadas) {
+        if (preguntaLower.includes(empresa)) {
+          empresasMencionadas.push(empresa);
+        }
+      }
+      
+      return empresasMencionadas;
+    }
 
-### Regulación
-- Regulado por: ${knowledgeData.empresa.regulacion.regulado_por}
-- Vigilado por: ${knowledgeData.empresa.regulacion.vigilado_por}
-- Aclaraciones: ${knowledgeData.empresa.regulacion.aclaraciones.join(', ')}
+    // Función para validar soldados y rangos militares
+    function validarRangoMilitar(pregunta) {
+      const preguntaLower = pregunta.toLowerCase();
+      let alertas = [];
+      
+      // Detectar menciones de soldados
+      if (preguntaLower.includes('soldado') || preguntaLower.includes('soldados')) {
+        alertas.push('🚨 SOLDADOS: NO se presta a soldados. Solo oficiales y suboficiales activos.');
+      }
+      
+      // Detectar menciones de rangos específicos
+      const rangosSoldados = ['soldado', 'soldados', 'raso', 'rasos'];
+      for (const rango of rangosSoldados) {
+        if (preguntaLower.includes(rango)) {
+          alertas.push('🚨 RANGO NO AUTORIZADO: Este rango NO es elegible para créditos.');
+        }
+      }
+      
+      return alertas;
+    }
 
-## GLOSARIO DE TÉRMINOS
-- **Libranza**: ${knowledgeData.glosario.libranza}
-- **Pagaduría**: ${knowledgeData.glosario.pagaduria}
-- **Desprendible de pago**: ${knowledgeData.glosario.desprendible_pago}
-- **Embargo pensional**: ${knowledgeData.glosario.embargo_pensional}
-- **Paz y salvo**: ${knowledgeData.glosario.paz_salvo}
-- **Fianza**: ${knowledgeData.glosario.fianza}
+    // Función para validar montos y plazos
+    function validarMontosPlazos(pregunta) {
+      const preguntaLower = pregunta.toLowerCase();
+      let alertas = [];
+      
+      // Extraer números que podrían ser montos
+      const montos = pregunta.match(/\$?([0-9]+(?:[.,][0-9]{3})*(?:[.,][0-9]+)?)/g);
+      if (montos) {
+        for (const montoStr of montos) {
+          const monto = parseFloat(montoStr.replace(/[\$,\.]/g, ''));
+          if (monto > 140000000) {
+            alertas.push('🚨 MONTO EXCEDIDO: El monto máximo es $140,000,000');
+          }
+        }
+      }
+      
+      // Extraer plazos
+      const plazos = pregunta.match(/(\d+)\s*mes/gi);
+      if (plazos) {
+        for (const plazoStr of plazos) {
+          const plazo = parseInt(plazoStr.match(/\d+/)[0]);
+          if (plazo > 180) {
+            alertas.push('🚨 PLAZO EXCEDIDO: El plazo máximo es 180 meses');
+          }
+          if (plazo < 24) {
+            alertas.push('🚨 PLAZO INSUFICIENTE: El plazo mínimo es 24 meses');
+          }
+        }
+      }
+      
+      return alertas;
+    }
 
-## TIPOS DE CRÉDITO DISPONIBLES
-${knowledgeData.tipos_credito.map(tipo => `- **${tipo.tipo}**: ${tipo.descripcion}`).join('\n')}
+    // Función para validar edades
+    function validarEdad(pregunta) {
+      const preguntaLower = pregunta.toLowerCase();
+      let alertas = [];
+      
+      // Buscar menciones de edad
+      const edades = pregunta.match(/(\d+)\s*año/gi);
+      if (edades) {
+        for (const edadStr of edades) {
+          const edad = parseInt(edadStr.match(/\d+/)[0]);
+          if (edad < 18) {
+            alertas.push('🚨 EDAD INSUFICIENTE: Debe ser mayor de 18 años');
+          }
+          if (edad > 82) {
+            alertas.push('🚨 EDAD EXCEDIDA: La edad máxima es 82 años');
+          }
+        }
+      }
+      
+      return alertas;
+    }
 
-## BENEFICIOS PARA ASESORES
-### Ventajas
-${knowledgeData.beneficios_asesores.ventajas.map(v => `- ${v}`).join('\n')}
+    // Validar empresas mencionadas en la pregunta
+    const empresasMencionadas = validarEmpresaAutorizada(question);
+    let validacionEmpresa = '';
+    
+    if (empresasMencionadas.length > 0) {
+      // Verificar si alguna empresa mencionada NO está en la lista autorizada
+      const empresasNoAutorizadas = empresasMencionadas.filter(empresa => 
+        !EMPRESAS_AUTORIZADAS.includes(empresa.toLowerCase())
+      );
+      
+      if (empresasNoAutorizadas.length > 0) {
+        validacionEmpresa = `\n\n🚨 VALIDACIÓN CRÍTICA: La empresa "${empresasNoAutorizadas[0].toUpperCase()}" NO está en la lista de convenios autorizados. DEBES responder que NO se presta a empleados de esta empresa. Consulta la sección "CONVENIOS - PAGADURÍAS - EMPRESAS" para ver las únicas empresas autorizadas.`;
+      }
+    }
 
-### Comisiones
-- **Desembolso**: ${knowledgeData.beneficios_asesores.comisiones.desembolso.valor}
-- **Ejemplo**: ${knowledgeData.beneficios_asesores.comisiones.desembolso.ejemplo}
-- **Frecuencia de pago**: ${knowledgeData.beneficios_asesores.comisiones.desembolso.frecuencia_pago}
-- **Refinanciación**: ${knowledgeData.beneficios_asesores.comisiones.refinanciacion.valor}
-- **Adicional refinanciación**: ${knowledgeData.beneficios_asesores.comisiones.refinanciacion.adicional}
-
-### Bono Millonario
-- **Descripción**: ${knowledgeData.beneficios_asesores.bono_millonario.descripcion}
-- **Fechas de pago 2024**: ${knowledgeData.beneficios_asesores.bono_millonario.fechas_pago_2024.join(', ')}
-- **Requisitos**: ${knowledgeData.beneficios_asesores.bono_millonario.requisitos.join(', ')}
-
-## ESTRUCTURA DEL PRODUCTO
-- **Plazo**: ${knowledgeData.estructura_producto.plazo}
-- **Fianza**: ${knowledgeData.estructura_producto.fianza}
-- **Tasas**: ${knowledgeData.estructura_producto.tasas.descripcion}
-  - Tasa ejemplo: ${knowledgeData.estructura_producto.tasas.tasa_ejemplo}
-  - Nota: ${knowledgeData.estructura_producto.tasas.nota}
-- **Comisión corretaje**: ${knowledgeData.estructura_producto.comision_corretaje}
-
-## SIMULACIÓN DE CRÉDITO
-### Ejemplo de Cálculo
-- **Monto solicitado**: ${knowledgeData.simulacion_credito.ejemplo_calculo.monto_solicitado}
-- **Plazo**: ${knowledgeData.simulacion_credito.ejemplo_calculo.plazo_meses} meses
-- **Tasa de interés**: ${knowledgeData.simulacion_credito.ejemplo_calculo.tasa_interes_mensual}
-- **Cuota mensual**: ${knowledgeData.simulacion_credito.ejemplo_calculo.cuota_mensual}
-- **Nota**: ${knowledgeData.simulacion_credito.ejemplo_calculo.nota}
-
-### Fórmula de Cálculo
-${knowledgeData.simulacion_credito.formula_calculo}
-
-### Descuentos Aplicables
-${knowledgeData.simulacion_credito.descuentos_aplicables.map(d => `- ${d}`).join('\n')}
-
-## POLÍTICAS DE CRÉDITO
-### Sujetos de crédito
-${knowledgeData.politicas_credito.sujetos_credito.map(s => `- ${s}`).join('\n')}
-
-### NO sujetos de crédito
-${knowledgeData.politicas_credito.no_sujetos_credito.map(s => `- ${s}`).join('\n')}
-
-### Documentos Requeridos
-**Pensionados:** ${knowledgeData.politicas_credito.archivos_requeridos.pensionados.join(', ')}
-**Activos:** ${knowledgeData.politicas_credito.archivos_requeridos.activos.join(', ')}
-**Fuerzas Militares/Policía:** ${knowledgeData.politicas_credito.archivos_requeridos.fuerzas_militares_policia.join(', ')}
-
-## SEGUROS
-### Seguro de Vida Deudor
-- Coberturas: ${knowledgeData.seguros.seguro_vida_deudor.coberturas.join(', ')}
-- Edad mínima de ingreso: ${knowledgeData.seguros.seguro_vida_deudor.edad_ingreso}
-
-### Seguro de Accidentes Personales
-- Cobertura: ${knowledgeData.seguros.seguro_accidentes_personales.cobertura}
-- Planes disponibles: ${knowledgeData.seguros.seguro_accidentes_personales.planes.tipos}
-- Rango de cobertura: ${knowledgeData.seguros.seguro_accidentes_personales.planes.cobertura_rango}
-
-## CÁLCULO DE CAPACIDAD DE PAGO
-${knowledgeData.calculo_capacidad_pago.definicion}
-
-### Métodos de Cálculo
-- **Ley 1527**: ${knowledgeData.calculo_capacidad_pago.metodos_calculo.ley_1527}
-- **Ley 50**: ${knowledgeData.calculo_capacidad_pago.metodos_calculo.ley_50}
-- **Mínimo Vital**: ${knowledgeData.calculo_capacidad_pago.metodos_calculo.minimo_vital}
-
-## ARGUMENTOS DE VENTA
-### Ventajas Competitivas
-${knowledgeData.argumentos_venta.ventajas_competitivas.map(v => `- ${v}`).join('\n')}
-
-### Portal de Clientes
-- Acceso: ${knowledgeData.argumentos_venta.portal_clientes.acceso.join(', ')}
-- Trámites disponibles: ${knowledgeData.argumentos_venta.portal_clientes.tramites.join(', ')}
-
-### Canales de Servicio
-- Teléfono Bogotá: ${knowledgeData.argumentos_venta.canales_servicio.telefonos.bogota}
-- Línea gratuita: ${knowledgeData.argumentos_venta.canales_servicio.telefonos.gratuita_nacional}
-- Horario: ${knowledgeData.argumentos_venta.canales_servicio.telefonos.horario}
-
-## CÓDIGO DE ÉTICA
-### Deberes del Asesor
-${knowledgeData.codigo_etica.deberes_asesor.slice(0, 10).map(d => `- ${d}`).join('\n')}
-
-### Prohibiciones
-${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`).join('\n')}
-    `;
+    // Ejecutar todas las validaciones
+    const alertasRango = validarRangoMilitar(question);
+    const alertasMontos = validarMontosPlazos(question);
+    const alertasEdad = validarEdad(question);
+    
+    // Combinar todas las alertas
+    const todasLasAlertas = [...alertasRango, ...alertasMontos, ...alertasEdad];
+    let validacionesAdicionales = '';
+    
+    if (todasLasAlertas.length > 0) {
+      validacionesAdicionales = `\n\n${todasLasAlertas.join('\n')}`;
+    }
 
     // Detectar si el usuario menciona su nombre en la pregunta actual
     const namePattern = /(?:me llamo|mi nombre es|soy|mi nombre|llamarme)\s+([A-Za-zÁÉÍÓÚáéíóúÑñ]+)/i;
@@ -374,7 +440,33 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
     }
     
     // Crear el prompt para la IA incluyendo contexto del historial si existe
-    let prompt = `Eres un asesor experto de Skala Fintech. Responde de manera conversacional y personalizada usando el siguiente contexto:\n${KNOWLEDGE}`;
+    let prompt = `Eres un asesor experto de Skala Fintech. Responde de manera conversacional y personalizada usando el siguiente contexto:\n${KNOWLEDGE}${validacionEmpresa}${validacionesAdicionales}
+
+🔴 REGLAS CRÍTICAS DE VALIDACIÓN - APLICAR ESTRICTAMENTE:
+
+📋 EMPRESAS Y CONVENIOS:
+1. SOLO se presta a las empresas listadas en "CONVENIOS - PAGADURÍAS - EMPRESAS"
+2. Si preguntan por una empresa NO listada, responde: "No tenemos convenio con [EMPRESA]. Solo prestamos a empleados de las empresas con las que tenemos convenios activos."
+3. ECOPETROL NO está en nuestra lista de convenios - NO se presta a empleados de Ecopetrol
+
+👥 RANGOS MILITARES Y POLICÍA:
+4. NO se presta a SOLDADOS - Solo oficiales y suboficiales activos
+5. Ejército: Oficiales y suboficiales activos (NO soldados, NO rasos)
+6. Policía: Oficiales y patrulleros (NO soldados)
+7. Si mencionan "soldado" o "raso", responder claramente que NO son elegibles
+
+💰 MONTOS Y PLAZOS:
+8. Monto máximo: $140,000,000 - Si piden más, informar el límite
+9. Plazo mínimo: 24 meses, máximo: 180 meses
+10. Ejército/Policía activos: Máximo 60 meses y montos específicos
+
+👤 EDADES Y ELEGIBILIDAD:
+11. Edad mínima: 18 años, máxima: 82 años
+12. Verificar SIEMPRE contra "SUJETOS DE CRÉDITO" y "NO SUJETOS DE CRÉDITO"
+13. Si no está explícitamente permitido, responder que NO se puede prestar
+
+⚠️ RESPUESTA ESTÁNDAR PARA CASOS NO AUTORIZADOS:
+"Esta solicitud no cumple con nuestros criterios de elegibilidad según nuestras políticas actuales."`;
     
     // Agregar contexto del historial de chat si existe
     if (chatContext) {
@@ -464,7 +556,7 @@ ${knowledgeData.codigo_etica.prohibiciones_asesor.slice(0, 10).map(p => `- ${p}`
         model: 'llama-3.1-8b-instant',
         messages: [{ role: 'user', content: prompt }],
         max_tokens: 150,
-        temperature: 0.3
+        temperature: 0.1
       })
     });
 
