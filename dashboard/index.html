@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <meta name="theme-color" content="#161b22"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/favicon.svg"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+  <link rel="stylesheet" href="/dashboard/assets/css/dashboard.css"/>
+  <title>Panel Admin - Skala IA</title>
+</head>
+<body>
+  <!-- Menú Hamburguesa -->
+  <nav class="hamburger-menu">
+    <input type="checkbox" id="menu-toggle" class="menu-toggle">
+    <label for="menu-toggle" class="menu-button">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </label>
+
+    <div class="menu-overlay">
+      <ul class="menu-list">
+        <li><a href="/" class="menu-item">
+          🏠 Inicio
+        </a></li>
+        <li><a href="/chatbot.html" class="menu-item">
+          🤖 Chat Asesor
+        </a></li>
+        <li><a href="/simulador.html" class="menu-item">
+          🧮 Simulador
+        </a></li>
+        <li><a href="/dashboard/" class="menu-item active">
+          📊 Panel Admin
+        </a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header del Dashboard -->
+  <header class="dashboard-header">
+    <h1>📊 Panel Administrativo</h1>
+    <p>Gestión de datos y configuración del sistema Skala IA</p>
+  </header>
+
+  <!-- Contenido Principal -->
+  <main class="dashboard-main">
+    <!-- Sección de CRUD -->
+    <section class="crud-section">
+      <div class="crud-header">
+        <h2>Gestión de Datos</h2>
+        <button id="addRecordBtn" class="btn-primary">
+          ➕ Agregar Registro
+        </button>
+      </div>
+
+      <!-- Tabla de Datos -->
+      <div class="table-container">
+        <table id="dataTable" class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Los datos se cargarán dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Loading Indicator -->
+      <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+        <div class="loading-spinner"></div>
+        <span>Cargando datos...</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal para Crear/Editar -->
+  <div id="modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Agregar Registro</h3>
+        <button id="closeModalBtn" class="close-btn">&times;</button>
+      </div>
+
+      <form id="recordForm" class="modal-form">
+        <div class="form-group">
+          <label for="name">Nombre:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Estado:</label>
+          <select id="status" name="status" required>
+            <option value="activo">Activo</option>
+            <option value="inactivo">Inactivo</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" class="btn-secondary">Cancelar</button>
+          <button type="submit" class="btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/dashboard/assets/js/crud.js"></script>
+</body>
+</html>

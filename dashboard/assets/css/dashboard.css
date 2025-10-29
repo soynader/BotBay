@@ -1,0 +1,464 @@
+/* ========================================
+   DASHBOARD STYLES
+   ======================================== */
+
+/* Variables del Dashboard */
+:root {
+  --dashboard-primary: #00c2cb;
+  --dashboard-secondary: #2a2a2a;
+  --dashboard-accent: #00a8b1;
+  --dashboard-text: #ffffff;
+  --dashboard-text-secondary: #cccccc;
+  --dashboard-bg: #0a0a0a;
+  --dashboard-surface: #1a1a1a;
+  --dashboard-border: #333333;
+  --dashboard-success: #28a745;
+  --dashboard-danger: #dc3545;
+  --dashboard-warning: #ffc107;
+}
+
+/* ========================================
+   MENÚ HAMBURGUESA
+   ======================================== */
+
+.hamburger-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.menu-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 5px;
+  background: var(--dashboard-surface);
+  border-radius: 6px;
+  border: 1px solid var(--dashboard-border);
+}
+
+.hamburger-line {
+  width: 30px;
+  height: 3px;
+  background: var(--dashboard-text);
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.menu-toggle:checked + .menu-button .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-toggle:checked + .menu-button .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle:checked + .menu-button .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.menu-toggle:checked ~ .menu-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-list {
+  position: absolute;
+  top: 80px;
+  left: 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle:checked ~ .menu-overlay .menu-list {
+  transform: translateX(0);
+}
+
+.menu-item {
+  display: block;
+  color: var(--dashboard-text);
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  background: var(--dashboard-surface);
+  border-radius: 8px;
+  border: 1px solid var(--dashboard-border);
+  transition: all 0.3s ease;
+  min-width: 200px;
+}
+
+.menu-item:hover,
+.menu-item.active {
+  background: var(--dashboard-primary);
+  color: var(--dashboard-bg);
+  transform: translateX(10px);
+}
+
+/* ========================================
+   HEADER DEL DASHBOARD
+   ======================================== */
+
+.dashboard-header {
+  margin-top: 80px;
+  padding: 2rem 1rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--dashboard-surface), var(--dashboard-secondary));
+  border-bottom: 1px solid var(--dashboard-border);
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--dashboard-primary);
+}
+
+.dashboard-header p {
+  font-size: 1.1rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* ========================================
+   CONTENIDO PRINCIPAL
+   ======================================== */
+
+.dashboard-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* ========================================
+   SECCIÓN CRUD
+   ======================================== */
+
+.crud-section {
+  background: var(--dashboard-surface);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid var(--dashboard-border);
+}
+
+.crud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.crud-header h2 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: var(--dashboard-primary);
+}
+
+/* ========================================
+   TABLA DE DATOS
+   ======================================== */
+
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--dashboard-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.data-table th,
+.data-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--dashboard-border);
+}
+
+.data-table th {
+  background: var(--dashboard-secondary);
+  font-weight: 600;
+  color: var(--dashboard-primary);
+  position: sticky;
+  top: 0;
+}
+
+.data-table tbody tr:hover {
+  background: var(--dashboard-secondary);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ========================================
+   BOTONES
+   ======================================== */
+
+.btn-primary {
+  background: var(--dashboard-primary);
+  color: var(--dashboard-bg);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: var(--dashboard-accent);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: var(--dashboard-secondary);
+  color: var(--dashboard-text);
+  border: 1px solid var(--dashboard-border);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--dashboard-border);
+}
+
+.btn-success {
+  background: var(--dashboard-success);
+  color: white;
+}
+
+.btn-danger {
+  background: var(--dashboard-danger);
+  color: white;
+}
+
+/* ========================================
+   LOADING INDICATOR
+   ======================================== */
+
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: var(--dashboard-text-secondary);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--dashboard-border);
+  border-top: 4px solid var(--dashboard-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ========================================
+   MODAL
+   ======================================== */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: var(--dashboard-surface);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid var(--dashboard-border);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--dashboard-border);
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: var(--dashboard-primary);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--dashboard-text-secondary);
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: var(--dashboard-danger);
+}
+
+/* ========================================
+   FORMULARIO MODAL
+   ======================================== */
+
+.modal-form {
+  padding: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dashboard-text);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--dashboard-border);
+  border-radius: 6px;
+  background: var(--dashboard-bg);
+  color: var(--dashboard-text);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--dashboard-primary);
+  box-shadow: 0 0 0 2px rgba(0, 194, 203, 0.2);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--dashboard-border);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .crud-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .crud-header h2 {
+    text-align: center;
+  }
+
+  .dashboard-main {
+    padding: 1rem;
+  }
+
+  .crud-section {
+    padding: 1rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 1rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-header {
+    margin-top: 60px;
+    padding: 1rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 2rem;
+  }
+
+  .menu-item {
+    min-width: 180px;
+    font-size: 1rem;
+    padding: 12px 15px;
+  }
+}

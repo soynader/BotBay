@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <meta name="theme-color" content="#161b22"/>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+  <link rel="apple-touch-icon" href="/favicon.svg"/>
+  <link rel="stylesheet" href="/assets/css/styles.css"/>
+  <title>CrediGestro</title>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <a href="/chatbot.html" aria-label="Inicio">
+        <img src="/favicon.svg" alt="CrediGestor" class="logo" loading="eager"/>
+      </a>
+    </div>
+    <div class="header-controls">
+      <button id="newChatBtn" class="control-btn" title="Nueva conversación">🗨️ Nueva</button>
+      <button id="simuladorBtn" class="control-btn" title="Simulador de Crédito">🧮 Simulador</button>
+      <button id="clearHistoryBtn" class="control-btn" title="Limpiar historial">🗑️ Limpiar</button>
+      <span id="sessionInfo" class="session-info"></span>
+    </div>
+  </header>
+  <main id="chat">
+    <div id="messages"></div>
+    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+      <div class="loading-dots">
+        <span></span><span></span><span></span>
+      </div>
+      <span>Cargando historial...</span>
+    </div>
+  </main>
+  <footer>
+    <input id="input" type="text" placeholder="Escribí la pregunta del cliente…" autocomplete="off"/>
+    <button id="sendBtn">➤</button>
+  </footer>
+
+  <script src="/assets/js/chat-history.js"></script>
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>

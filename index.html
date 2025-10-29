@@ -7,37 +7,146 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
   <link rel="apple-touch-icon" href="/favicon.svg"/>
   <link rel="stylesheet" href="/assets/css/styles.css"/>
-  <title>CrediGestro</title>
+  <title>Skala IA - Plataforma Principal</title>
+  <style>
+    .landing-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .landing-header {
+      margin-bottom: 3rem;
+    }
+
+    .landing-header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #00c2cb, #00a8b1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .landing-header p {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      margin-bottom: 0;
+    }
+
+    .option-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .option-card {
+      background: var(--bg-secondary);
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+
+    .option-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+      border-color: var(--primary-color);
+    }
+
+    .option-card h3 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: var(--primary-color);
+    }
+
+    .option-card p {
+      margin-bottom: 1.5rem;
+      opacity: 0.8;
+      line-height: 1.5;
+    }
+
+    .option-card .card-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .footer-note {
+      margin-top: 4rem;
+      opacity: 0.6;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .landing-container {
+        padding: 1rem;
+      }
+
+      .landing-header h1 {
+        font-size: 2rem;
+      }
+
+      .option-cards {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .option-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .option-card h3 {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .landing-header h1 {
+        font-size: 1.8rem;
+      }
+
+      .option-card {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <a href="/" aria-label="Inicio">
-        <img src="/favicon.svg" alt="CrediGestor" class="logo" loading="eager"/>
+  <div class="landing-container">
+    <div class="landing-header">
+      <img src="/favicon.svg" alt="Skala IA" style="width: 100px; margin-bottom: 2rem; filter: brightness(0) invert(1);">
+      <h1>Plataforma Skala IA</h1>
+      <p>Sistema integral de asesoría financiera inteligente</p>
+    </div>
+
+    <div class="option-cards">
+      <a href="/chatbot.html" class="option-card">
+        <span class="card-icon">🤖</span>
+        <h3>Chat Asesor</h3>
+        <p>Asistente virtual inteligente para consultas sobre créditos de libranza. Respuestas precisas basadas en información autorizada de Skala.</p>
+      </a>
+
+      <a href="/dashboard/" class="option-card">
+        <span class="card-icon">📊</span>
+        <h3>Panel Admin</h3>
+        <p>Gestión administrativa completa. CRUD de datos, gestión de usuarios y configuración del sistema.</p>
       </a>
     </div>
-    <div class="header-controls">
-      <button id="newChatBtn" class="control-btn" title="Nueva conversación">🗨️ Nueva</button>
-      <button id="simuladorBtn" class="control-btn" title="Simulador de Crédito">🧮 Simulador</button>
-      <button id="clearHistoryBtn" class="control-btn" title="Limpiar historial">🗑️ Limpiar</button>
-      <span id="sessionInfo" class="session-info"></span>
-    </div>
-  </header>
-  <main id="chat">
-    <div id="messages"></div>
-    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
-      <div class="loading-dots">
-        <span></span><span></span><span></span>
-      </div>
-      <span>Cargando historial...</span>
-    </div>
-  </main>
-  <footer>
-    <input id="input" type="text" placeholder="Escribí la pregunta del cliente…" autocomplete="off"/>
-    <button id="sendBtn">➤</button>
-  </footer>
 
-  <script src="/assets/js/chat-history.js"></script>
-  <script src="/assets/js/app.js"></script>
+    <div class="footer-note">
+      <p>© 2024 Skala Fintech - Todos los derechos reservados</p>
+    </div>
+  </div>
 </body>
 </html>
